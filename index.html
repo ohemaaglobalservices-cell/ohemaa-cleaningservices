@@ -69,48 +69,6 @@
             border: 1px solid rgba(243, 168, 18, 0.25);
         }
     </style>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        const firebaseConfig = typeof __firebase_config !== 'undefined' 
-            ? JSON.parse(__firebase_config) 
-            : {
-                apiKey: "AIzaSyDummyKeyForFallbackOnly",
-                authDomain: "ohemaa-global-services.firebaseapp.com",
-                databaseURL: "https://ohemaa-global-services-default-rtdb.firebaseio.com",
-                projectId: "ohemaa-global-services",
-                storageBucket: "ohemaa-global-services.appspot.com",
-                messagingSenderId: "1234567890",
-                appId: "1:1234567890:web:1234567890"
-            };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'ohemaa-global-prod';
-
-        window.firebaseDb = db;
-        window.appId = appId;
-        window.firebaseAuth = auth;
-
-        async function initAuth() {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-                if (window.setupFirestoreListener) window.setupFirestoreListener();
-            } catch (err) {
-                if (window.setupFirestoreListener) window.setupFirestoreListener();
-            }
-        }
-
-        initAuth();
-    </script>
 </head>
 <body class="bg-navy-950 text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-slate-900">
 
@@ -337,7 +295,7 @@
                 </div>
                 <p class="text-xs text-slate-500 max-w-md mx-auto">Providing royal cleanliness standards across Lagos, Abuja, Port Harcourt, and clients worldwide.</p>
                 <div class="pt-6 border-t border-slate-800 text-xs text-slate-600">
-                    &copy; 2026 Ohemaa Global Services. Permanent Multi-Device Sync Active.
+                    &copy; 2026 Ohemaa Global Services. Global Permanent Database Active.
                 </div>
             </div>
         </footer>
@@ -350,15 +308,15 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 p-8 rounded-3xl border border-brand-gold/30 shadow-2xl relative overflow-hidden">
                 <div class="z-10 space-y-2">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-black tracking-widest uppercase">
-                        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping"></span> Live Global Sync Active
+                        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping"></span> Global Multi-Device Live Cloud Sync Active
                     </div>
                     <h1 class="text-3xl sm:text-5xl font-black text-white font-serif">Owner Command Center</h1>
-                    <p class="text-xs sm:text-sm text-slate-400 font-light">All customer bookings are saved permanently across all devices and browsers.</p>
+                    <p class="text-xs sm:text-sm text-slate-400 font-light">Every single booking submitted from any tab, browser, or phone worldwide is permanently saved for years and synced live here.</p>
                 </div>
 
                 <div class="z-10 flex flex-wrap items-center gap-3">
                     <button onclick="fetchCloudBookings()" class="px-4 py-3 rounded-xl bg-brand-gold text-slate-950 hover:bg-amber-400 text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-lg">
-                        <i class="fa-solid fa-rotate text-xs"></i> Refresh Bookings
+                        <i class="fa-solid fa-rotate text-xs"></i> Force Refresh
                     </button>
                     <button onclick="openChangePinModal()" class="px-4 py-3 rounded-xl bg-navy-950 hover:bg-navy-800 text-slate-200 text-xs font-bold border border-slate-700 transition-all flex items-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-key text-brand-gold"></i> Change PIN
@@ -376,7 +334,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="bg-navy-900 p-6 rounded-2xl border border-slate-800 shadow-xl flex items-center justify-between">
                     <div>
-                        <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block">Total Bookings</span>
+                        <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block">Total Global Bookings</span>
                         <span id="kpiTotalBookings" class="text-3xl font-black text-white mt-1 block">0</span>
                     </div>
                     <div class="w-12 h-12 bg-brand-gold/10 text-brand-gold border border-brand-gold/30 rounded-2xl flex items-center justify-center text-xl">
@@ -454,7 +412,7 @@
                     <i class="fa-solid fa-crown"></i>
                 </div>
                 <h3 class="text-2xl font-black text-white font-serif">Owner Access Code</h3>
-                <p class="text-xs text-slate-400 mt-1">Enter PIN passcode to unlock live appointments.</p>
+                <p class="text-xs text-slate-400 mt-1">Enter PIN passcode to unlock live global appointments.</p>
             </div>
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
@@ -537,7 +495,7 @@
                 <i class="fa-solid fa-circle-check"></i>
             </div>
             <h3 class="text-2xl font-black text-slate-900 font-serif mb-1">Booking Confirmed!</h3>
-            <p class="text-xs text-slate-600 mb-6 leading-relaxed">Your reservation details have been saved permanently and synced to the Ohemaa Global dispatch team across all devices.</p>
+            <p class="text-xs text-slate-600 mb-6 leading-relaxed">Your reservation details have been saved permanently to the cloud and synced to the Ohemaa Global dispatch team across all devices.</p>
             <div class="space-y-3">
                 <button id="whatsappRedirectBtn" onclick="openWhatsAppConfirmation()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 cursor-pointer">
                     <i class="fa-brands fa-whatsapp text-lg"></i> Send via WhatsApp
@@ -592,6 +550,7 @@
         </button>
     </div>
 
+    <!-- GLOBAL SYNCHRONIZATION ENGINE -->
     <script>
         const FIREBASE_REST_ENDPOINT = "https://ohemaa-global-services-default-rtdb.firebaseio.com/bookings.json";
 
@@ -622,12 +581,14 @@
 
             loadLocalStorageBookings();
             fetchCloudBookings();
-            setInterval(fetchCloudBookings, 3000);
+            
+            // Poll global cloud database every 2 seconds for real-time multi-tab & multi-phone syncing
+            setInterval(fetchCloudBookings, 2000);
         });
 
         function loadLocalStorageBookings() {
             try {
-                const stored = localStorage.getItem('ohemaa_local_bookings');
+                const stored = localStorage.getItem('ohemaa_global_bookings_v5');
                 if (stored) {
                     const parsed = JSON.parse(stored);
                     if (Array.isArray(parsed) && parsed.length > 0) {
@@ -636,13 +597,13 @@
                     }
                 }
             } catch (e) {
-                console.warn('Local storage error:', e);
+                console.warn('Local storage warning:', e);
             }
         }
 
         function saveLocalStorageBookings() {
             try {
-                localStorage.setItem('ohemaa_local_bookings', JSON.stringify(appointmentOrders));
+                localStorage.setItem('ohemaa_global_bookings_v5', JSON.stringify(appointmentOrders));
             } catch (e) {
                 console.warn('Saving local storage failed:', e);
             }
@@ -669,39 +630,6 @@
                 });
         }
 
-        window.setupFirestoreListener = function() {
-            if (!window.firebaseDb) return;
-            try {
-                const { collection, onSnapshot } = window;
-                onSnapshot(collection(window.firebaseDb, 'artifacts', window.appId || 'ohemaa-global-prod', 'public', 'data', 'bookings'), 
-                (snapshot) => {
-                    const docsData = [];
-                    snapshot.forEach(doc => {
-                        docsData.push({ idKey: doc.id, ...doc.data() });
-                    });
-                    if (docsData.length > 0) {
-                        const merged = [...appointmentOrders];
-                        docsData.forEach(d => {
-                            const idx = merged.findIndex(m => m.id === d.id || m.idKey === d.idKey);
-                            if (idx > -1) {
-                                merged[idx] = { ...merged[idx], ...d };
-                            } else {
-                                merged.push(d);
-                            }
-                        });
-                        appointmentOrders = cleanAndNormalizeBookings(merged.sort((a,b) => (b.timestamp||0) - (a.timestamp||0)));
-                        saveLocalStorageBookings();
-                        renderAdminBookings();
-                    }
-                }, 
-                (err) => {
-                    console.warn("Firestore snapshot listener notice:", err);
-                });
-            } catch(e) {
-                console.warn("Firestore setup fallback:", e);
-            }
-        };
-
         window.fetchCloudBookings = function() {
             fetch(FIREBASE_REST_ENDPOINT)
                 .then(response => response.json())
@@ -712,16 +640,19 @@
                             ...data[key]
                         }));
 
-                        const merged = [...appointmentOrders];
-                        fetched.forEach(d => {
-                            const index = merged.findIndex(m => m.id === d.id || m.idKey === d.idKey);
-                            if (index > -1) {
-                                merged[index] = { ...merged[index], ...d };
-                            } else {
-                                merged.push(d);
-                            }
+                        const mergedMap = new Map();
+                        // Merge local existing
+                        appointmentOrders.forEach(item => {
+                            const key = item.idKey || item.id;
+                            if (key) mergedMap.set(key, item);
+                        });
+                        // Override with cloud records
+                        fetched.forEach(item => {
+                            const key = item.idKey || item.id;
+                            if (key) mergedMap.set(key, item);
                         });
 
+                        const merged = Array.from(mergedMap.values());
                         appointmentOrders = cleanAndNormalizeBookings(merged.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)));
                         saveLocalStorageBookings();
                     }
@@ -765,11 +696,13 @@
             const submitBtn = document.getElementById('submitBtn');
             if (submitBtn) {
                 submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-2"></i> Processing...';
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-2"></i> Processing Global Booking...';
             }
 
+            const uniqueId = 'ORD-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+
             const newOrder = {
-                id: 'ORD-' + Math.floor(100000 + Math.random() * 900000),
+                id: uniqueId,
                 name: name,
                 phone: phone,
                 email: email || 'N/A',
@@ -783,27 +716,12 @@
 
             latestBookingData = newOrder;
 
-            // IMMEDIATE LOCAL SAVE
+            // Save immediately locally
             appointmentOrders.unshift(newOrder);
             saveLocalStorageBookings();
             renderAdminBookings();
 
-            // Push to Firestore Cloud Database
-            try {
-                if (window.firebaseDb) {
-                    const { collection, addDoc } = window;
-                    addDoc(collection(window.firebaseDb, 'artifacts', window.appId || 'ohemaa-global', 'public', 'data', 'bookings'), newOrder)
-                        .then(docRef => {
-                            newOrder.idKey = docRef.id;
-                            saveLocalStorageBookings();
-                        })
-                        .catch(e => console.warn('Firestore add notice:', e));
-                }
-            } catch(e) {
-                console.warn(e);
-            }
-
-            // Realtime Firebase REST Fallback
+            // Broadcast & Save permanently to global cloud database
             fetch(FIREBASE_REST_ENDPOINT, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -840,7 +758,7 @@
             if (messageEl) messageEl.value = '';
 
             document.getElementById('confirmationModal').classList.remove('hidden');
-            renderAdminBookings();
+            fetchCloudBookings();
         }
 
         window.openWhatsAppConfirmation = function() {
@@ -1021,7 +939,7 @@
                 ownerTab.classList.remove('hidden');
                 navOwner.classList.add('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
                 navCustomer.classList.remove('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
-                renderAdminBookings();
+                fetchCloudBookings();
             } else {
                 ownerTab.classList.add('hidden');
                 customerTab.classList.remove('hidden');
