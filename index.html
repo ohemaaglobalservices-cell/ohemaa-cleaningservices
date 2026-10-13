@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -899,68 +899,3 @@
                 alert('No booking data available to export.');
                 return;
             }
-            let csvContent = "data:text/csv;charset=utf-8,ID,Name,Phone,Email,Service,Status,Date\n";
-            appointmentOrders.forEach(o => {
-                csvContent += `"${o.id}","${o.name}","${o.phone}","${o.email}","${o.service}","${o.status}","${o.date}"\n`;
-            });
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `ohemaa_bookings_${new Date().toISOString().slice(0,10)}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        };
-
-        window.selectServiceAndScroll = function(service) {
-            document.getElementById('appttService').value = service;
-            const el = document.getElementById('appointment');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-        };
-
-        window.closeMobileMenu = function() {
-            document.getElementById('mobileMenu')?.classList.add('hidden');
-        };
-
-        window.toggleChatWindow = function() {
-            document.getElementById('chatWindow').classList.toggle('hidden');
-        };
-
-        window.handleChatKeyPress = function(e) {
-            if (e.key === 'Enter') sendChatMessage();
-        };
-
-        window.sendChatMessage = function() {
-            const input = document.getElementById('chatInput');
-            const text = input.value.trim();
-            if (!text) return;
-
-            const chatMessages = document.getElementById('chatMessages');
-            chatMessages.innerHTML += `<div class="bg-brand-blue text-white p-3 rounded-2xl ml-auto max-w-[80%]">${text}</div>`;
-            input.value = '';
-
-            setTimeout(() => {
-                chatMessages.innerHTML += `<div class="bg-white p-3 rounded-2xl border border-slate-200 text-slate-700 max-w-[80%]">Thank you! Our live team has received your message. You can also reach us directly at 0806 530 8556.</div>`;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 1000);
-        };
-
-        window.closeConfirmationModal = function() {
-            document.getElementById('confirmationModal').classList.add('hidden');
-        };
-
-        // Mobile drawer event listener
-        document.addEventListener('DOMContentLoaded', () => {
-            initCloudSync();
-            const mobileBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileBtn && mobileMenu) {
-                mobileBtn.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-        });
-    </script>
-</body>
-</html>
-
