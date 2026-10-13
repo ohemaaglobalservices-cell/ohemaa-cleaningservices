@@ -144,6 +144,7 @@
 
     <main id="customerTab" class="block transition-all">
 
+        <!-- Hero & Instant Booking Form Section -->
         <section id="hero" class="relative pt-32 pb-24 hero-bg text-white min-h-screen flex flex-col justify-center">
             <div class="max-w-5xl mx-auto px-6 text-center space-y-6">
 
@@ -550,7 +551,6 @@
         </button>
     </div>
 
-    <!-- GLOBAL SYNCHRONIZATION ENGINE -->
     <script>
         const FIREBASE_REST_ENDPOINT = "https://ohemaa-global-services-default-rtdb.firebaseio.com/bookings.json";
 
@@ -582,8 +582,16 @@
             loadLocalStorageBookings();
             fetchCloudBookings();
             
-            // Poll global cloud database every 2 seconds for real-time multi-tab & multi-phone syncing
+            // Continuous polling every 2 seconds for real-time multi-tab & multi-device synchronization
             setInterval(fetchCloudBookings, 2000);
+        });
+
+        // Inter-tab immediate synchronization via browser storage event listener
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'ohemaa_global_bookings_v5') {
+                loadLocalStorageBookings();
+                renderAdminBookings();
+            }
         });
 
         function loadLocalStorageBookings() {
@@ -614,9 +622,11 @@
             return rawArray
                 .filter(item => item && (item.name || item.phone || item.message))
                 .map(item => {
+                    const fallbackId = 'ORD-' + Math.floor(Math.random() * 1000000);
+                    const primaryKey = item.idKey || item.id || fallbackId;
                     return {
-                        idKey: item.idKey || item.id || 'ORD-' + Math.floor(Math.random() * 1000000),
-                        id: item.id || item.idKey || 'ORD-' + Math.floor(Math.random() * 1000000),
+                        idKey: primaryKey,
+                        id: item.id || primaryKey,
                         name: item.name || 'Valued Client',
                         phone: item.phone || 'No Phone Provided',
                         email: item.email || 'N/A',
@@ -641,12 +651,12 @@
                         }));
 
                         const mergedMap = new Map();
-                        // Merge local existing
+                        // Pre-populate with local records
                         appointmentOrders.forEach(item => {
                             const key = item.idKey || item.id;
                             if (key) mergedMap.set(key, item);
                         });
-                        // Override with cloud records
+                        // Override/merge with cloud records
                         fetched.forEach(item => {
                             const key = item.idKey || item.id;
                             if (key) mergedMap.set(key, item);
@@ -703,6 +713,7 @@
 
             const newOrder = {
                 id: uniqueId,
+                idKey: uniqueId,
                 name: name,
                 phone: phone,
                 email: email || 'N/A',
@@ -757,7 +768,7 @@
             if (emailEl) emailEl.value = '';
             if (messageEl) messageEl.value = '';
 
-            document.getElementById('confirmationModal').classList.remove('hidden');
+            document.getElementById('confirmationModal')?.classList.remove('hidden');
             fetchCloudBookings();
         }
 
@@ -769,7 +780,7 @@
         };
 
         window.closeConfirmationModal = function() {
-            document.getElementById('confirmationModal').classList.add('hidden');
+            document.getElementById('confirmationModal')?.classList.add('hidden');
         };
 
         window.renderAdminBookings = function() {
@@ -793,10 +804,15 @@
             });
 
             // Analytics KPI Updates
-            document.getElementById('kpiTotalBookings').innerText = appointmentOrders.length;
-            document.getElementById('kpiPendingCallbacks').innerText = appointmentOrders.filter(o => o.status === 'New Lead').length;
-            document.getElementById('kpiCompletedJobs').innerText = appointmentOrders.filter(o => o.status === 'Completed').length;
-            document.getElementById('kpiEstRevenue').innerText = '₦' + (appointmentOrders.length * 50000).toLocaleString();
+            const totalEl = document.getElementById('kpiTotalBookings');
+            const pendingEl = document.getElementById('kpiPendingCallbacks');
+            const completedEl = document.getElementById('kpiCompletedJobs');
+            const estEl = document.getElementById('kpiEstRevenue');
+
+            if (totalEl) totalEl.innerText = appointmentOrders.length;
+            if (pendingEl) pendingEl.innerText = appointmentOrders.filter(o => o.status === 'New Lead').length;
+            if (completedEl) completedEl.innerText = appointmentOrders.filter(o => o.status === 'Completed').length;
+            if (estEl) estEl.innerText = '₦' + (appointmentOrders.length * 50000).toLocaleString();
 
             if (!grid) return;
 
@@ -935,16 +951,16 @@
                     openAdminModal();
                     return;
                 }
-                customerTab.classList.add('hidden');
-                ownerTab.classList.remove('hidden');
-                navOwner.classList.add('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
-                navCustomer.classList.remove('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
+                customerTab?.classList.add('hidden');
+                ownerTab?.classList.remove('hidden');
+                navOwner?.classList.add('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
+                navCustomer?.classList.remove('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
                 fetchCloudBookings();
             } else {
-                ownerTab.classList.add('hidden');
-                customerTab.classList.remove('hidden');
-                navCustomer.classList.add('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
-                navOwner.classList.remove('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
+                ownerTab?.classList.add('hidden');
+                customerTab?.classList.remove('hidden');
+                navCustomer?.classList.add('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
+                navOwner?.classList.remove('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
             }
         };
 
@@ -956,17 +972,17 @@
             }
         };
 
-        window.openAdminModal = function() { document.getElementById('adminLoginModal').classList.remove('hidden'); };
-        window.closeAdminModal = function() { document.getElementById('adminLoginModal').classList.add('hidden'); };
+        window.openAdminModal = function() { document.getElementById('adminLoginModal')?.classList.remove('hidden'); };
+        window.closeAdminModal = function() { document.getElementById('adminLoginModal')?.classList.add('hidden'); };
 
         window.openForgotPinModal = function() {
             closeAdminModal();
-            document.getElementById('forgotPinModal').classList.remove('hidden');
+            document.getElementById('forgotPinModal')?.classList.remove('hidden');
         };
-        window.closeForgotPinModal = function() { document.getElementById('forgotPinModal').classList.add('hidden'); };
+        window.closeForgotPinModal = function() { document.getElementById('forgotPinModal')?.classList.add('hidden'); };
 
-        window.openChangePinModal = function() { document.getElementById('changePinModal').classList.remove('hidden'); };
-        window.closeChangePinModal = function() { document.getElementById('changePinModal').classList.add('hidden'); };
+        window.openChangePinModal = function() { document.getElementById('changePinModal')?.classList.remove('hidden'); };
+        window.closeChangePinModal = function() { document.getElementById('changePinModal')?.classList.add('hidden'); };
 
         window.handleAdminLogin = function(e) {
             e.preventDefault();
