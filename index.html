@@ -12,6 +12,10 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
     
+    <!-- Firebase SDKs for Cloud Realtime Sync across ALL devices -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -292,7 +296,7 @@
                 </div>
                 <p class="text-xs text-slate-500 max-w-md mx-auto">Providing royal cleanliness standards across Ajah, Lekki, Victoria Island, and global clients worldwide.</p>
                 <div class="pt-6 border-t border-slate-800 text-xs text-slate-600">
-                    &copy; 2026 Ohemaa Global Services. Command Hub Active.
+                    &copy; 2026 Ohemaa Global Services. Live Multi-Device Sync Active.
                 </div>
             </div>
         </footer>
@@ -306,10 +310,10 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 p-8 rounded-3xl border border-brand-gold/30 shadow-2xl relative overflow-hidden">
                 <div class="z-10 space-y-2">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-black tracking-widest uppercase">
-                        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping"></span> Live Owner Command Hub Active
+                        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping"></span> Live Cloud Sync Active Across Devices
                     </div>
                     <h1 class="text-3xl sm:text-5xl font-black text-white font-serif">Owner Command Center</h1>
-                    <p class="text-xs sm:text-sm text-slate-400 font-light">All customer bookings will appear here instantly. Tap any lead to call or WhatsApp client directly.</p>
+                    <p class="text-xs sm:text-sm text-slate-400 font-light">All customer bookings from any phone appear here instantly in real time.</p>
                 </div>
 
                 <div class="z-10 flex flex-wrap items-center gap-3">
@@ -534,30 +538,39 @@
 
     <!-- MAIN JAVASCRIPT LOGIC -->
     <script>
+        // Universal Public Firebase Database for Instant Live Synchronization
+        const firebaseConfig = {
+            databaseURL: "https://ohemaa-global-services-default-rtdb.firebaseio.com/"
+        };
+        
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.database();
+        const bookingsRef = db.ref('ohemaa_bookings');
+
         let appointmentOrders = [];
         let isAuthenticated = false;
         let activeFilter = 'all';
         let latestBookingData = null;
 
-        // Initialize Local Storage Orders on Load
+        // Listen for Real-Time Cloud Updates on ALL Devices
         window.addEventListener('DOMContentLoaded', () => {
-            loadOrders();
-        });
-
-        function loadOrders() {
-            const saved = localStorage.getItem('ohemaa_orders_v4');
-            if (saved) {
-                try {
-                    appointmentOrders = JSON.parse(saved);
-                } catch(e) {
+            bookingsRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    // Convert Firebase object to array sorted by timestamp descending
+                    appointmentOrders = Object.keys(data).map(key => ({
+                        firebaseKey: key,
+                        ...data[key]
+                    })).sort((a, b) => b.timestamp - a.timestamp);
+                } else {
                     appointmentOrders = [];
                 }
-            }
-        }
-
-        function saveOrders() {
-            localStorage.setItem('ohemaa_orders_v4', JSON.stringify(appointmentOrders));
-        }
+                renderAdminBookings();
+            });
+        });
 
         // Form Submit Handler
         window.handleAppointmentSubmit = function(e) {
@@ -588,15 +601,16 @@
             };
 
             latestBookingData = newOrder;
-            appointmentOrders.unshift(newOrder);
-            saveOrders();
 
-            document.getElementById('heroAppointmentForm').reset();
-            document.getElementById('confirmationModal').classList.remove('hidden');
-
-            if (isAuthenticated) {
-                renderAdminBookings();
-            }
+            // Push directly to Firebase Cloud Realtime Database
+            bookingsRef.push(newOrder, (error) => {
+                if (error) {
+                    alert('Database error: ' + error.message);
+                } else {
+                    document.getElementById('heroAppointmentForm').reset();
+                    document.getElementById('confirmationModal').classList.remove('hidden');
+                }
+            });
         };
 
         window.openWhatsAppConfirmation = function() {
@@ -612,7 +626,6 @@
 
         // Render Command Center UI
         window.renderAdminBookings = function() {
-            loadOrders();
             const grid = document.getElementById('adminBookingsGrid');
             const searchVal = document.getElementById('adminSearchInput')?.value.toLowerCase() || '';
 
@@ -676,13 +689,13 @@
 
                         <div class="pt-3 border-t border-slate-800 space-y-3">
                             <div class="flex items-center justify-between gap-2">
-                                <select onchange="updateOrderStatus('${order.id}', this.value)" class="bg-navy-950 text-slate-300 border border-slate-800 text-xs px-3 py-2 rounded-xl focus:outline-none">
+                                <select onchange="updateOrderStatus('${order.firebaseKey}', this.value)" class="bg-navy-950 text-slate-300 border border-slate-800 text-xs px-3 py-2 rounded-xl focus:outline-none">
                                     <option value="New Lead" ${order.status === 'New Lead' ? 'selected' : ''}>New Lead</option>
                                     <option value="Contacted" ${order.status === 'Contacted' ? 'selected' : ''}>Contacted</option>
                                     <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option>
                                 </select>
 
-                                <button onclick="deleteBooking('${order.id}')" class="text-slate-500 hover:text-rose-400 text-xs p-2 cursor-pointer">
+                                <button onclick="deleteBooking('${order.firebaseKey}')" class="text-slate-500 hover:text-rose-400 text-xs p-2 cursor-pointer">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             </div>
@@ -701,20 +714,17 @@
             }).join('');
         };
 
-        window.updateOrderStatus = function(id, newStatus) {
-            const idx = appointmentOrders.findIndex(o => o.id === id);
-            if (idx !== -1) {
-                appointmentOrders[idx].status = newStatus;
-                saveOrders();
-                renderAdminBookings();
+        window.updateOrderStatus = function(firebaseKey, newStatus) {
+            if (firebaseKey) {
+                db.ref('ohemaa_bookings/' + firebaseKey).update({ status: newStatus });
             }
         };
 
-        window.deleteBooking = function(id) {
+        window.deleteBooking = function(firebaseKey) {
             if (confirm("Are you sure you want to delete this booking?")) {
-                appointmentOrders = appointmentOrders.filter(o => o.id !== id);
-                saveOrders();
-                renderAdminBookings();
+                if (firebaseKey) {
+                    db.ref('ohemaa_bookings/' + firebaseKey).remove();
+                }
             }
         };
 
@@ -848,7 +858,6 @@
         };
 
         window.selectServiceAndScroll = function(service) {
-            // Switch to customer tab if currently in owner tab
             switchTab('customer');
             
             const selectEl = document.getElementById('appttService');
