@@ -1,4 +1,4 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -40,7 +40,7 @@ DOCTYPE html>
     
     <style>
         .glass-nav {
-            background: rgba(3, 6, 15, 0.92);
+            background: rgba(3, 6, 15, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
         }
@@ -64,15 +64,16 @@ DOCTYPE html>
             -webkit-text-fill-color: transparent;
         }
         .glass-card {
-            background: rgba(11, 19, 43, 0.7);
+            background: rgba(11, 19, 43, 0.85);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(243, 168, 18, 0.2);
+            border: 1px solid rgba(243, 168, 18, 0.25);
         }
     </style>
 </head>
 <body class="bg-navy-950 text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-slate-900">
 
-    <nav class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-amber-500/20" id="navbar">
+    <!-- Top Header Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-amber-500/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 
@@ -102,15 +103,15 @@ DOCTYPE html>
 
                 <!-- Navigation Controls -->
                 <div class="hidden md:flex items-center space-x-6 font-medium text-slate-300 text-xs tracking-wider uppercase">
-                    <button id="navBtnCustomer" onclick="switchTab('customer')" class="text-brand-gold font-bold px-4 py-2 rounded-xl bg-brand-gold/10 border border-brand-gold/40 shadow-sm transition-all flex items-center gap-2">
+                    <button id="navBtnCustomer" onclick="switchTab('customer')" class="text-brand-gold font-bold px-4 py-2 rounded-xl bg-brand-gold/10 border border-brand-gold/40 shadow-sm transition-all flex items-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-gem"></i> Client Portal
                     </button>
-                    <button id="navBtnOwner" onclick="attemptAdminAccess()" class="text-slate-300 hover:text-brand-gold px-4 py-2 rounded-xl border border-slate-800 hover:border-brand-gold/40 transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-shield-crown text-brand-gold"></i> Owner Command Center
+                    <button id="navBtnOwner" onclick="attemptAdminAccess()" class="text-slate-300 hover:text-brand-gold px-4 py-2 rounded-xl border border-slate-800 hover:border-brand-gold/40 transition-all flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-shield-halved text-brand-gold"></i> Owner Command Center
                     </button>
                 </div>
 
-                <!-- Direct Phone Line Button -->
+                <!-- Phone Line -->
                 <div class="hidden md:flex items-center space-x-4">
                     <a href="tel:08065308556" class="flex items-center gap-2 text-xs font-black text-slate-950 bg-gradient-to-r from-amber-400 via-brand-gold to-amber-500 hover:brightness-110 px-5 py-2.5 rounded-xl transition-all shadow-lg">
                         <i class="fa-solid fa-phone-volume"></i> 0806 530 8556
@@ -119,7 +120,7 @@ DOCTYPE html>
 
                 <!-- Mobile Hamburger Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobileMenuBtn" class="p-2 text-slate-200 hover:text-white">
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="p-2 text-slate-200 hover:text-white cursor-pointer">
                         <i class="fa-solid fa-bars-staggered text-2xl text-brand-gold"></i>
                     </button>
                 </div>
@@ -128,10 +129,10 @@ DOCTYPE html>
 
         <!-- Mobile Drawer -->
         <div id="mobileMenu" class="hidden md:hidden bg-navy-950 border-b border-slate-800 px-6 pt-4 pb-6 space-y-4">
-            <button onclick="switchTab('customer'); closeMobileMenu()" class="block w-full text-left py-2 font-bold text-slate-200 text-sm flex items-center gap-2">
+            <button onclick="switchTab('customer'); closeMobileMenu()" class="block w-full text-left py-2 font-bold text-slate-200 text-sm flex items-center gap-2 cursor-pointer">
                 <i class="fa-solid fa-gem text-brand-gold"></i> Client Website
             </button>
-            <button onclick="attemptAdminAccess(); closeMobileMenu()" class="block w-full text-left py-2 font-bold text-brand-gold text-sm flex items-center gap-2">
+            <button onclick="attemptAdminAccess(); closeMobileMenu()" class="block w-full text-left py-2 font-bold text-brand-gold text-sm flex items-center gap-2 cursor-pointer">
                 <i class="fa-solid fa-shield-halved"></i> Owner Command Center
             </button>
             <div class="pt-3 border-t border-slate-800">
@@ -142,6 +143,7 @@ DOCTYPE html>
         </div>
     </nav>
 
+    <!-- MAIN CLIENT WEBSITE -->
     <main id="customerTab" class="block transition-all">
 
         <!-- Hero Section -->
@@ -150,7 +152,7 @@ DOCTYPE html>
 
                 <!-- Badge -->
                 <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-brand-gold/60 bg-navy-950/80 text-brand-gold text-xs font-black tracking-widest uppercase shadow-xl">
-                    <i class="fa-solid fa-crown text-xs"></i> WORLDWIDE REAL-TIME BOOKINGS NOW LIVE
+                    <i class="fa-solid fa-crown text-xs"></i> INSTANT 24/7 ONLINE BOOKING ACTIVE
                 </div>
 
                 <!-- Title -->
@@ -159,37 +161,26 @@ DOCTYPE html>
                 </h1>
 
                 <p class="text-slate-300 text-sm sm:text-lg leading-relaxed max-w-3xl mx-auto font-light">
-                    Ohemaa Global Services is your world-class partner for post-construction, residential, commercial, and facility upkeep across Lagos and beyond. Book directly online anytime—24/7.
+                    Ohemaa Global Services is your world-class partner for post-construction, residential, commercial, and facility upkeep across Lagos and beyond. Book directly below in seconds.
                 </p>
 
-                <!-- Value Highlights -->
-                <div class="pt-2 flex flex-wrap justify-center gap-3">
-                    <div class="px-4 py-2 rounded-xl bg-navy-900/90 border border-slate-700/80 text-xs font-semibold text-slate-300 flex items-center gap-2">
-                        <i class="fa-solid fa-circle-check text-emerald-400"></i> Verified Professional Technicians
-                    </div>
-                    <div class="px-4 py-2 rounded-xl bg-navy-900/90 border border-slate-700/80 text-xs font-semibold text-slate-300 flex items-center gap-2">
-                        <i class="fa-solid fa-wand-magic-sparkles text-brand-gold"></i> Deep Post-Construction Cleaners
-                    </div>
-                    <div class="px-4 py-2 rounded-xl bg-navy-900/90 border border-slate-700/80 text-xs font-semibold text-slate-300 flex items-center gap-2">
-                        <i class="fa-solid fa-globe text-blue-400"></i> Instant Global Cloud Sync
-                    </div>
-                </div>
-
+                <!-- Location Header -->
                 <div class="text-brand-gold text-xs font-bold flex items-center justify-center gap-2 pt-2">
                     <i class="fa-solid fa-location-dot"></i> Along Abraham Adesanya, Ajah–Lagos • 0806 530 8556
                 </div>
 
                 <!-- Booking Card -->
-                <div id="appointment" class="pt-8 max-w-xl mx-auto text-left">
-                    <div class="glass-card p-6 sm:p-10 rounded-3xl border border-brand-gold/30 shadow-2xl relative">
+                <div id="appointment" class="pt-6 max-w-xl mx-auto text-left">
+                    <div class="glass-card p-6 sm:p-10 rounded-3xl border border-brand-gold/40 shadow-2xl relative">
                         
                         <div class="absolute -top-3.5 right-8 bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 font-black text-[10px] px-4 py-1.5 rounded-full uppercase tracking-wider shadow-xl">
                             50% OFF PROMO ACTIVE
                         </div>
 
                         <h3 class="text-2xl sm:text-3xl font-black text-white font-serif mb-1">Book Your Service</h3>
-                        <p class="text-xs text-slate-300 mb-6 font-light">Enter your details below. Your booking will sync instantly to our dispatch team.</p>
+                        <p class="text-xs text-slate-300 mb-6 font-light">Fill details below and tap button. Your request will instantly process!</p>
 
+                        <!-- BOOKING FORM -->
                         <form id="heroAppointmentForm" onsubmit="handleAppointmentSubmit(event)" class="space-y-4">
                             <div>
                                 <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Full Name *</label>
@@ -227,7 +218,7 @@ DOCTYPE html>
                             </div>
 
                             <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-400 via-brand-gold to-amber-500 hover:brightness-110 text-slate-950 font-black py-4 rounded-xl transition-all duration-200 text-xs tracking-widest uppercase shadow-xl flex items-center justify-center gap-2 cursor-pointer">
-                                <i class="fa-solid fa-paper-plane"></i> Confirm Online Reservation
+                                <i class="fa-solid fa-paper-plane"></i> Confirm & Process Booking
                             </button>
                         </form>
                     </div>
@@ -236,6 +227,7 @@ DOCTYPE html>
             </div>
         </section>
 
+        <!-- Services Section -->
         <section id="services" class="py-24 bg-white text-slate-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-16">
@@ -251,7 +243,7 @@ DOCTYPE html>
                         </div>
                         <h3 class="font-bold text-slate-900 text-lg mb-2">Post-Construction</h3>
                         <p class="text-slate-600 text-xs leading-relaxed mb-6">Complete paint, dust, silicone, and grout clearing for brand new homes and commercial builds.</p>
-                        <button onclick="selectServiceAndScroll('Post-Construction Cleaning')" class="text-brand-blue font-black text-xs hover:text-brand-gold flex items-center gap-2 uppercase tracking-wider">
+                        <button onclick="selectServiceAndScroll('Post-Construction Cleaning')" class="text-brand-blue font-black text-xs hover:text-brand-gold flex items-center gap-2 uppercase tracking-wider cursor-pointer">
                             Book Service <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </button>
                     </div>
@@ -262,7 +254,7 @@ DOCTYPE html>
                         </div>
                         <h3 class="font-bold text-slate-900 text-lg mb-2">Residential Deep Clean</h3>
                         <p class="text-slate-600 text-xs leading-relaxed mb-6">Comprehensive sanitization of kitchens, marble floors, walls, and hard-to-reach living spaces.</p>
-                        <button onclick="selectServiceAndScroll('Residential Cleaning')" class="text-brand-blue font-black text-xs hover:text-brand-gold flex items-center gap-2 uppercase tracking-wider">
+                        <button onclick="selectServiceAndScroll('Residential Cleaning')" class="text-brand-blue font-black text-xs hover:text-brand-gold flex items-center gap-2 uppercase tracking-wider cursor-pointer">
                             Book Service <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </button>
                     </div>
@@ -273,7 +265,7 @@ DOCTYPE html>
                         </div>
                         <h3 class="font-bold text-slate-900 text-lg mb-2">Upholstery & Rugs</h3>
                         <p class="text-slate-600 text-xs leading-relaxed mb-6">Heavy hot-water steam extraction for dirt removal on sofas, carpets, and luxury drapes.</p>
-                        <button onclick="selectServiceAndScroll('Upholstery & Rug Cleaning')" class="text-brand-blue font-black text-xs hover:text-brand-gold flex items-center gap-2 uppercase tracking-wider">
+                        <button onclick="selectServiceAndScroll('Upholstery & Rug Cleaning')" class="text-brand-blue font-black text-xs hover:text-brand-gold flex items-center gap-2 uppercase tracking-wider cursor-pointer">
                             Book Service <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </button>
                     </div>
@@ -284,7 +276,7 @@ DOCTYPE html>
                         </div>
                         <h3 class="font-bold text-slate-900 text-lg mb-2">Fumigation & Pest</h3>
                         <p class="text-slate-600 text-xs leading-relaxed mb-6">Certified safety chemical treatments against termites, rodents, and crawling pests.</p>
-                        <button onclick="selectServiceAndScroll('Pest Control & Fumigation')" class="text-brand-blue font-black text-xs hover:text-brand-gold flex items-center gap-2 uppercase tracking-wider">
+                        <button onclick="selectServiceAndScroll('Pest Control & Fumigation')" class="text-brand-blue font-black text-xs hover:text-brand-gold flex items-center gap-2 uppercase tracking-wider cursor-pointer">
                             Book Service <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </button>
                     </div>
@@ -300,23 +292,24 @@ DOCTYPE html>
                 </div>
                 <p class="text-xs text-slate-500 max-w-md mx-auto">Providing royal cleanliness standards across Ajah, Lekki, Victoria Island, and global clients worldwide.</p>
                 <div class="pt-6 border-t border-slate-800 text-xs text-slate-600">
-                    &copy; 2026 Ohemaa Global Services. Cloud Connected Hub.
+                    &copy; 2026 Ohemaa Global Services. Command Hub Active.
                 </div>
             </div>
         </footer>
     </main>
 
+    <!-- OWNER COMMAND CENTER TAB -->
     <main id="ownerTab" class="hidden min-h-screen pt-28 pb-20 bg-navy-950 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 
-            <!-- Top Header Banner -->
+            <!-- Banner Header -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 p-8 rounded-3xl border border-brand-gold/30 shadow-2xl relative overflow-hidden">
                 <div class="z-10 space-y-2">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-black tracking-widest uppercase">
-                        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping"></span> Global Live Cloud Sync Enabled
+                        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping"></span> Live Owner Command Hub Active
                     </div>
                     <h1 class="text-3xl sm:text-5xl font-black text-white font-serif">Owner Command Center</h1>
-                    <p class="text-xs sm:text-sm text-slate-400 font-light">Worldwide appointments appear here in real-time. Tap any client card to initiate a direct call.</p>
+                    <p class="text-xs sm:text-sm text-slate-400 font-light">All customer bookings will appear here instantly. Tap any lead to call or WhatsApp client directly.</p>
                 </div>
 
                 <div class="z-10 flex flex-wrap items-center gap-3">
@@ -336,7 +329,7 @@ DOCTYPE html>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="bg-navy-900 p-6 rounded-2xl border border-slate-800 shadow-xl flex items-center justify-between">
                     <div>
-                        <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block">Total Global Bookings</span>
+                        <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block">Total Bookings</span>
                         <span id="kpiTotalBookings" class="text-3xl font-black text-white mt-1 block">0</span>
                     </div>
                     <div class="w-12 h-12 bg-brand-gold/10 text-brand-gold border border-brand-gold/30 rounded-2xl flex items-center justify-center text-xl">
@@ -383,29 +376,30 @@ DOCTYPE html>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-                    <button onclick="setFilter('all')" id="filterBtnAll" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-gold text-slate-950 transition-all">
+                    <button onclick="setFilter('all')" id="filterBtnAll" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-gold text-slate-950 transition-all cursor-pointer">
                         All Leads
                     </button>
-                    <button onclick="setFilter('new')" id="filterBtnNew" class="px-4 py-2.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">
+                    <button onclick="setFilter('new')" id="filterBtnNew" class="px-4 py-2.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all cursor-pointer">
                         New Leads
                     </button>
-                    <button onclick="setFilter('completed')" id="filterBtnCompleted" class="px-4 py-2.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">
+                    <button onclick="setFilter('completed')" id="filterBtnCompleted" class="px-4 py-2.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all cursor-pointer">
                         Completed
                     </button>
                 </div>
             </div>
 
-            <!-- Live Grid -->
+            <!-- Bookings Grid -->
             <div id="adminBookingsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Dynamically populated from Firestore -->
+                <!-- Dynamically populated -->
             </div>
 
         </div>
     </main>
 
+    <!-- ADMIN LOGIN MODAL -->
     <div id="adminLoginModal" class="fixed inset-0 bg-navy-950/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-navy-900 border border-brand-gold/30 rounded-3xl max-w-md w-full p-8 text-white relative shadow-2xl">
-            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2 cursor-pointer">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
             <div class="text-center mb-6">
@@ -413,7 +407,7 @@ DOCTYPE html>
                     <i class="fa-solid fa-crown"></i>
                 </div>
                 <h3 class="text-2xl font-black text-white font-serif">Owner Access Code</h3>
-                <p class="text-xs text-slate-400 mt-1">Enter PIN passcode to unlock live cloud appointments.</p>
+                <p class="text-xs text-slate-400 mt-1">Enter PIN passcode to unlock live appointments.</p>
             </div>
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
@@ -423,18 +417,18 @@ DOCTYPE html>
                     Verify & Unlock Command Center
                 </button>
                 <div class="text-center pt-2">
-                    <button type="button" onclick="openForgotPinModal()" class="text-xs text-brand-gold hover:underline font-semibold">
-                        Forgot PIN? (Recover via Emergency Phone)
+                    <button type="button" onclick="openForgotPinModal()" class="text-xs text-brand-gold hover:underline font-semibold cursor-pointer">
+                        Forgot PIN? (Recover via Helpline)
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Forgot PIN Modal -->
+    <!-- FORGOT PIN MODAL -->
     <div id="forgotPinModal" class="fixed inset-0 bg-navy-950/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-navy-900 border border-brand-gold/30 rounded-3xl max-w-md w-full p-8 text-white relative shadow-2xl">
-            <button onclick="closeForgotPinModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+            <button onclick="closeForgotPinModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2 cursor-pointer">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
             <div class="text-center mb-6">
@@ -442,7 +436,7 @@ DOCTYPE html>
                     <i class="fa-solid fa-unlock-keyhole"></i>
                 </div>
                 <h3 class="text-2xl font-black text-white font-serif">PIN Recovery</h3>
-                <p class="text-xs text-slate-400 mt-1">Enter the official Ohemaa business helpline number (<span class="text-brand-gold font-bold">08065308556</span>) to reset your PIN.</p>
+                <p class="text-xs text-slate-400 mt-1">Enter official business helpline (<span class="text-brand-gold font-bold">08065308556</span>) to reset your PIN.</p>
             </div>
             <form onsubmit="handleForgotPinSubmit(event)" class="space-y-4">
                 <div>
@@ -450,8 +444,8 @@ DOCTYPE html>
                     <input type="tel" id="forgotPhoneInput" required placeholder="08065308556" class="w-full px-4 py-3 bg-navy-950 border border-slate-700 rounded-xl text-white text-xs focus:ring-2 focus:ring-brand-gold focus:outline-none">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Set New 4-Digit PIN *</label>
-                    <input type="password" id="newForgotPinInput" required maxlength="6" placeholder="Enter new PIN" class="w-full px-4 py-3 bg-navy-950 border border-slate-700 rounded-xl text-white text-xs tracking-widest text-center font-bold focus:ring-2 focus:ring-brand-gold focus:outline-none">
+                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Set New PIN *</label>
+                    <input type="password" id="newForgotPinInput" required placeholder="Enter new PIN" class="w-full px-4 py-3 bg-navy-950 border border-slate-700 rounded-xl text-white text-xs tracking-widest text-center font-bold focus:ring-2 focus:ring-brand-gold focus:outline-none">
                 </div>
                 <button type="submit" class="w-full bg-gradient-to-r from-amber-400 via-brand-gold to-amber-500 text-slate-950 font-black py-4 rounded-xl text-xs uppercase tracking-widest hover:brightness-110 transition-all shadow-lg cursor-pointer">
                     Reset & Save New PIN
@@ -460,10 +454,10 @@ DOCTYPE html>
         </div>
     </div>
 
-    <!-- Change PIN Modal -->
+    <!-- CHANGE PIN MODAL -->
     <div id="changePinModal" class="fixed inset-0 bg-navy-950/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-navy-900 border border-brand-gold/30 rounded-3xl max-w-md w-full p-8 text-white relative shadow-2xl">
-            <button onclick="closeChangePinModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+            <button onclick="closeChangePinModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2 cursor-pointer">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
             <div class="text-center mb-6">
@@ -471,7 +465,7 @@ DOCTYPE html>
                     <i class="fa-solid fa-key"></i>
                 </div>
                 <h3 class="text-2xl font-black text-white font-serif">Change Owner PIN</h3>
-                <p class="text-xs text-slate-400 mt-1">Enter your current passcode and choose a new secure PIN.</p>
+                <p class="text-xs text-slate-400 mt-1">Enter current passcode and choose new secure PIN.</p>
             </div>
             <form onsubmit="handleChangePinSubmit(event)" class="space-y-4">
                 <div>
@@ -489,7 +483,26 @@ DOCTYPE html>
         </div>
     </div>
 
-    <!-- Floating Chat Widget -->
+    <!-- BOOKING CONFIRMATION MODAL -->
+    <div id="confirmationModal" class="fixed inset-0 bg-navy-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 text-slate-800 shadow-2xl text-center border border-brand-gold/30">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center text-3xl mb-4">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="text-2xl font-black text-slate-900 font-serif mb-1">Booking Confirmed!</h3>
+            <p class="text-xs text-slate-600 mb-6 leading-relaxed">Your reservation details have been saved successfully and sent directly to Ohemaa Global dispatch team.</p>
+            <div class="space-y-3">
+                <button id="whatsappRedirectBtn" onclick="openWhatsAppConfirmation()" class="w-full bg-emerald-600 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Send via WhatsApp
+                </button>
+                <button onclick="closeConfirmationModal()" class="w-full bg-navy-950 text-brand-gold font-black py-3 rounded-xl text-xs uppercase tracking-widest cursor-pointer">
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHAT WIDGET -->
     <div id="chatWidget" class="fixed bottom-6 right-6 z-40 flex flex-col items-end">
         <div id="chatWindow" class="hidden mb-4 w-80 sm:w-96 bg-white text-slate-900 rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col h-[420px]">
             <div class="bg-navy-950 p-4 text-white flex justify-between items-center border-b border-brand-gold/30">
@@ -497,18 +510,18 @@ DOCTYPE html>
                     <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></span>
                     <h4 class="font-bold text-xs uppercase tracking-wider">Ohemaa Royal Support</h4>
                 </div>
-                <button onclick="toggleChatWindow()" class="text-slate-400 hover:text-white">
+                <button onclick="toggleChatWindow()" class="text-slate-400 hover:text-white cursor-pointer">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 chat-scroll bg-slate-50 text-xs">
                 <div class="bg-white p-3 rounded-2xl border border-slate-200 text-slate-700 shadow-sm">
-                    Welcome to Ohemaa Global Services. How may we assist with your residential or commercial space today?
+                    Welcome to Ohemaa Global Services. How may we assist with your space today?
                 </div>
             </div>
             <div class="p-3 bg-white border-t border-slate-200 flex gap-2">
                 <input type="text" id="chatInput" onkeypress="handleChatKeyPress(event)" placeholder="Type message..." class="flex-1 px-3 py-2 text-xs border border-slate-300 rounded-xl focus:outline-none">
-                <button onclick="sendChatMessage()" class="bg-brand-blue text-brand-gold px-4 py-2 rounded-xl text-xs font-bold">
+                <button onclick="sendChatMessage()" class="bg-brand-blue text-brand-gold px-4 py-2 rounded-xl text-xs font-bold cursor-pointer">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
             </div>
@@ -519,106 +532,50 @@ DOCTYPE html>
         </button>
     </div>
 
-    <!-- Confirmation Modal -->
-    <div id="confirmationModal" class="fixed inset-0 bg-navy-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full p-8 text-slate-800 shadow-2xl text-center border border-brand-gold/30">
-            <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center text-3xl mb-4">
-                <i class="fa-solid fa-check"></i>
-            </div>
-            <h3 class="text-2xl font-black text-slate-900 font-serif mb-1">Appointment Broadcasted!</h3>
-            <p class="text-xs text-slate-600 mb-6 leading-relaxed">Your reservation has been received on our global system. Our team will contact you directly via phone to confirm your 50% discount quote.</p>
-            <button onclick="closeConfirmationModal()" class="w-full bg-navy-950 text-brand-gold font-black py-4 rounded-xl text-xs uppercase tracking-widest shadow-lg">
-                Done
-            </button>
-        </div>
-    </div>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Global Configuration setup
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'ohemaa-global-prod-app';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-            apiKey: "AIzaSyDummyKeyForFallbackOnly12345",
-            authDomain: "ohemaa-global.firebaseapp.com",
-            projectId: "ohemaa-global",
-            storageBucket: "ohemaa-global.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef123456"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
+    <!-- MAIN JAVASCRIPT LOGIC -->
+    <script>
         let appointmentOrders = [];
         let isAuthenticated = false;
         let activeFilter = 'all';
-        let pendingDeleteId = null;
+        let latestBookingData = null;
 
-        // Initialize Firebase Authentication & Firestore Listener
-        async function initCloudSync() {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
+        // Initialize Local Storage Orders on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadOrders();
+        });
 
-                // Subscribe to Cloud Appointments in Realtime
-                const bookingsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'appointments');
-                
-                onSnapshot(bookingsColRef, (snapshot) => {
-                    appointmentOrders = [];
-                    snapshot.forEach((docSnap) => {
-                        appointmentOrders.push({
-                            firestoreId: docSnap.id,
-                            ...docSnap.data()
-                        });
-                    });
-
-                    // Sort newest first
-                    appointmentOrders.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-
-                    // Refresh Admin UI if visible
-                    if (isAuthenticated) {
-                        renderAdminBookings();
-                    }
-                }, (err) => {
-                    console.warn("Cloud Firestore fallback active: ", err);
-                    loadLocalOrdersFallback();
-                });
-
-            } catch (err) {
-                console.warn("Auth initialization fallback:", err);
-                loadLocalOrdersFallback();
-            }
-        }
-
-        function loadLocalOrdersFallback() {
-            const saved = localStorage.getItem('ohemaa_orders_v3');
+        function loadOrders() {
+            const saved = localStorage.getItem('ohemaa_orders_v4');
             if (saved) {
-                try { appointmentOrders = JSON.parse(saved); } catch(e) { appointmentOrders = []; }
+                try {
+                    appointmentOrders = JSON.parse(saved);
+                } catch(e) {
+                    appointmentOrders = [];
+                }
             }
-            if (isAuthenticated) renderAdminBookings();
         }
 
-        // Global Form Submission Function
-        window.handleAppointmentSubmit = async function(e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById('submitBtn');
-            if (submitBtn) submitBtn.disabled = true;
+        function saveOrders() {
+            localStorage.setItem('ohemaa_orders_v4', JSON.stringify(appointmentOrders));
+        }
 
-            const name = document.getElementById('appttName').value;
-            const phone = document.getElementById('appttPhone').value;
-            const email = document.getElementById('appttEmail').value;
+        // Form Submit Handler
+        window.handleAppointmentSubmit = function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('appttName').value.trim();
+            const phone = document.getElementById('appttPhone').value.trim();
+            const email = document.getElementById('appttEmail').value.trim();
             const service = document.getElementById('appttService').value;
-            const message = document.getElementById('appttMessage').value;
+            const message = document.getElementById('appttMessage').value.trim();
+
+            if (!name || !phone || !service || !message) {
+                alert('Please complete all required fields.');
+                return;
+            }
 
             const newOrder = {
-                id: 'ORD-' + Math.floor(1000 + Math.random() * 9000),
+                id: 'ORD-' + Math.floor(100000 + Math.random() * 900000),
                 name,
                 phone,
                 email,
@@ -630,22 +587,32 @@ DOCTYPE html>
                 timestamp: Date.now()
             };
 
-            try {
-                const bookingsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'appointments');
-                await addDoc(bookingsColRef, newOrder);
-            } catch(e) {
-                // Local fallback save if offline
-                appointmentOrders.unshift(newOrder);
-                localStorage.setItem('ohemaa_orders_v3', JSON.stringify(appointmentOrders));
-            }
+            latestBookingData = newOrder;
+            appointmentOrders.unshift(newOrder);
+            saveOrders();
 
-            document.getElementById('confirmationModal').classList.remove('hidden');
             document.getElementById('heroAppointmentForm').reset();
-            if (submitBtn) submitBtn.disabled = false;
+            document.getElementById('confirmationModal').classList.remove('hidden');
+
+            if (isAuthenticated) {
+                renderAdminBookings();
+            }
+        };
+
+        window.openWhatsAppConfirmation = function() {
+            if (!latestBookingData) return;
+            const msg = `Hello Ohemaa Global Services!\n\nI want to book an appointment:\n- *Name:* ${latestBookingData.name}\n- *Phone:* ${latestBookingData.phone}\n- *Service:* ${latestBookingData.service}\n- *Details:* ${latestBookingData.message}\n\nPlease confirm quote and discount!`;
+            const url = `https://wa.me/2348065308556?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        };
+
+        window.closeConfirmationModal = function() {
+            document.getElementById('confirmationModal').classList.add('hidden');
         };
 
         // Render Command Center UI
         window.renderAdminBookings = function() {
+            loadOrders();
             const grid = document.getElementById('adminBookingsGrid');
             const searchVal = document.getElementById('adminSearchInput')?.value.toLowerCase() || '';
 
@@ -659,7 +626,7 @@ DOCTYPE html>
                 return matchesSearch;
             });
 
-            // Update Analytics Counters
+            // Update Analytics
             document.getElementById('kpiTotalBookings').innerText = appointmentOrders.length;
             document.getElementById('kpiPendingCallbacks').innerText = appointmentOrders.filter(o => o.status === 'New Lead').length;
             document.getElementById('kpiCompletedJobs').innerText = appointmentOrders.filter(o => o.status === 'Completed').length;
@@ -670,8 +637,8 @@ DOCTYPE html>
             if (filtered.length === 0) {
                 grid.innerHTML = `
                     <div class="col-span-full bg-navy-900 border border-slate-800 rounded-3xl p-12 text-center text-slate-500 space-y-3">
-                        <i class="fa-solid fa-cloud-sun text-4xl text-slate-700"></i>
-                        <p class="text-xs font-medium">No booking requests found matching your filters.</p>
+                        <i class="fa-solid fa-clipboard-list text-4xl text-slate-700"></i>
+                        <p class="text-xs font-medium">No booking requests found in system.</p>
                     </div>
                 `;
                 return;
@@ -683,7 +650,7 @@ DOCTYPE html>
                 
                 const cleanPhone = (order.phone || '').replace(/[^0-9]/g, '');
                 const formattedPhone = cleanPhone.startsWith('0') ? '234' + cleanPhone.slice(1) : cleanPhone;
-                const whatsappMsg = encodeURIComponent(`Hello ${order.name}, this is Ohemaa Global Services regarding your appointment for ${order.service}.`);
+                const whatsappMsg = encodeURIComponent(`Hello ${order.name}, this is Ohemaa Global Services regarding your reservation for ${order.service}.`);
 
                 return `
                     <div class="bg-navy-900 border border-slate-800 p-6 rounded-3xl shadow-xl space-y-4 flex flex-col justify-between hover:border-brand-gold/40 transition-all">
@@ -701,35 +668,27 @@ DOCTYPE html>
 
                             <div class="bg-navy-950 p-4 rounded-2xl border border-slate-800/80 space-y-2 text-xs">
                                 <p class="text-slate-300 font-medium"><i class="fa-solid fa-envelope mr-1.5 text-brand-gold"></i> ${order.email}</p>
-                                <p class="text-slate-400 text-[11px] leading-relaxed pt-2 border-t border-slate-800 font-sans">
+                                <p class="text-slate-400 text-[11px] leading-relaxed pt-2 border-t border-slate-800">
                                     "${order.message}"
                                 </p>
                             </div>
                         </div>
 
-                        <!-- Direct Tap Call Box -->
                         <div class="pt-3 border-t border-slate-800 space-y-3">
-                            <button onclick="triggerDirectCall('${order.phone}')" class="w-full bg-gradient-to-r from-amber-500/10 via-brand-gold/20 to-amber-500/10 hover:brightness-120 border border-brand-gold/40 p-3 rounded-2xl text-center group transition-all cursor-pointer">
-                                <span class="text-[9px] text-brand-gold uppercase tracking-widest font-black block">Tap to Dial Client Direct</span>
-                                <span class="text-base font-black text-white group-hover:text-brand-gold transition-colors flex items-center justify-center gap-2 mt-0.5">
-                                    <i class="fa-solid fa-phone-volume text-brand-gold animate-bounce"></i> ${order.phone}
-                                </span>
-                            </button>
-
                             <div class="flex items-center justify-between gap-2">
-                                <select onchange="updateOrderStatus('${order.firestoreId}', '${order.id}', this.value)" class="bg-navy-950 text-slate-300 border border-slate-800 text-xs px-3 py-2 rounded-xl focus:outline-none">
+                                <select onchange="updateOrderStatus('${order.id}', this.value)" class="bg-navy-950 text-slate-300 border border-slate-800 text-xs px-3 py-2 rounded-xl focus:outline-none">
                                     <option value="New Lead" ${order.status === 'New Lead' ? 'selected' : ''}>New Lead</option>
                                     <option value="Contacted" ${order.status === 'Contacted' ? 'selected' : ''}>Contacted</option>
                                     <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option>
                                 </select>
 
-                                <button onclick="confirmDeleteBooking('${order.firestoreId}', '${order.id}')" class="text-slate-500 hover:text-rose-400 text-xs p-2">
+                                <button onclick="deleteBooking('${order.id}')" class="text-slate-500 hover:text-rose-400 text-xs p-2 cursor-pointer">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             </div>
 
                             <div class="grid grid-cols-2 gap-2">
-                                <button onclick="triggerDirectCall('${order.phone}')" class="bg-brand-gold hover:bg-amber-500 text-slate-950 font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
+                                <button onclick="triggerDirectCall('${order.phone}')" class="bg-brand-gold hover:bg-amber-500 text-slate-950 font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md cursor-pointer">
                                     <i class="fa-solid fa-phone"></i> Call Direct
                                 </button>
                                 <a href="https://wa.me/${formattedPhone}?text=${whatsappMsg}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
@@ -742,39 +701,24 @@ DOCTYPE html>
             }).join('');
         };
 
-        // Order Status & Delete Cloud Handlers
-        window.updateOrderStatus = async function(firestoreId, localId, newStatus) {
-            if (firestoreId && firestoreId !== 'undefined') {
-                try {
-                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'appointments', firestoreId);
-                    await updateDoc(docRef, { status: newStatus });
-                } catch(e) { console.error("Update status err:", e); }
-            } else {
-                const idx = appointmentOrders.findIndex(o => o.id === localId);
-                if (idx !== -1) {
-                    appointmentOrders[idx].status = newStatus;
-                    localStorage.setItem('ohemaa_orders_v3', JSON.stringify(appointmentOrders));
-                    renderAdminBookings();
-                }
+        window.updateOrderStatus = function(id, newStatus) {
+            const idx = appointmentOrders.findIndex(o => o.id === id);
+            if (idx !== -1) {
+                appointmentOrders[idx].status = newStatus;
+                saveOrders();
+                renderAdminBookings();
             }
         };
 
-        window.confirmDeleteBooking = async function(firestoreId, localId) {
-            if (confirm("Are you sure you want to delete this appointment?")) {
-                if (firestoreId && firestoreId !== 'undefined') {
-                    try {
-                        const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'appointments', firestoreId);
-                        await deleteDoc(docRef);
-                    } catch(e) { console.error("Delete doc err:", e); }
-                } else {
-                    appointmentOrders = appointmentOrders.filter(o => o.id !== localId);
-                    localStorage.setItem('ohemaa_orders_v3', JSON.stringify(appointmentOrders));
-                    renderAdminBookings();
-                }
+        window.deleteBooking = function(id) {
+            if (confirm("Are you sure you want to delete this booking?")) {
+                appointmentOrders = appointmentOrders.filter(o => o.id !== id);
+                saveOrders();
+                renderAdminBookings();
             }
         };
 
-        // Navigation Tab Logic
+        // Navigation Tabs
         window.switchTab = function(tabName) {
             const customerTab = document.getElementById('customerTab');
             const ownerTab = document.getElementById('ownerTab');
@@ -790,14 +734,12 @@ DOCTYPE html>
                 ownerTab.classList.remove('hidden');
                 navOwner.classList.add('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
                 navCustomer.classList.remove('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
-                navCustomer.classList.add('text-slate-300');
                 renderAdminBookings();
             } else {
                 ownerTab.classList.add('hidden');
                 customerTab.classList.remove('hidden');
                 navCustomer.classList.add('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
                 navOwner.classList.remove('bg-brand-gold/10', 'border-brand-gold/40', 'text-brand-gold', 'font-bold');
-                navOwner.classList.add('text-slate-300');
             }
         };
 
@@ -824,14 +766,14 @@ DOCTYPE html>
         window.handleAdminLogin = function(e) {
             e.preventDefault();
             const pin = document.getElementById('adminPinInput').value;
-            const savedPin = localStorage.getItem('ohemaa_admin_pin_v3') || '8556';
+            const savedPin = localStorage.getItem('ohemaa_admin_pin_v4') || '8556';
             if (pin === savedPin) {
                 isAuthenticated = true;
                 closeAdminModal();
                 document.getElementById('adminPinInput').value = '';
                 switchTab('owner');
             } else {
-                alert('Invalid Owner Passcode PIN.');
+                alert('Invalid PIN code.');
             }
         };
 
@@ -840,14 +782,13 @@ DOCTYPE html>
             const phone = document.getElementById('forgotPhoneInput').value.trim();
             const newPin = document.getElementById('newForgotPinInput').value.trim();
             
-            if (phone === '08065308556' || phone.includes('08065308556')) {
-                localStorage.setItem('ohemaa_admin_pin_v3', newPin);
-                alert('PIN successfully reset! You can now log in with your new PIN.');
+            if (phone.includes('08065308556') || phone === '08065308556') {
+                localStorage.setItem('ohemaa_admin_pin_v4', newPin);
+                alert('PIN successfully reset! You can now log in.');
                 closeForgotPinModal();
                 openAdminModal();
-                document.getElementById('forgotPinInput')?.reset();
             } else {
-                alert('Incorrect emergency helpline number. Please use 08065308556.');
+                alert('Incorrect business helpline number. Use 08065308556.');
             }
         };
 
@@ -855,14 +796,12 @@ DOCTYPE html>
             e.preventDefault();
             const currentPin = document.getElementById('currentPinInput').value;
             const newPin = document.getElementById('newPinInput').value;
-            const savedPin = localStorage.getItem('ohemaa_admin_pin_v3') || '8556';
+            const savedPin = localStorage.getItem('ohemaa_admin_pin_v4') || '8556';
 
             if (currentPin === savedPin) {
-                localStorage.setItem('ohemaa_admin_pin_v3', newPin);
-                alert('Owner PIN successfully updated!');
+                localStorage.setItem('ohemaa_admin_pin_v4', newPin);
+                alert('PIN successfully updated!');
                 closeChangePinModal();
-                document.getElementById('currentPinInput').value = '';
-                document.getElementById('newPinInput').value = '';
             } else {
                 alert('Current PIN is incorrect.');
             }
@@ -873,9 +812,9 @@ DOCTYPE html>
             switchTab('customer');
         };
 
-        window.triggerDirectCall = function(phoneNumber) {
-            if (!phoneNumber) return;
-            const cleanNum = phoneNumber.toString().replace(/[^0-9+]/g, '');
+        window.triggerDirectCall = function(phone) {
+            if (!phone) return;
+            const cleanNum = phone.replace(/[^0-9+]/g, '');
             window.location.href = `tel:${cleanNum}`;
         };
 
@@ -884,11 +823,9 @@ DOCTYPE html>
             ['All', 'New', 'Completed'].forEach(f => {
                 const btn = document.getElementById(`filterBtn${f}`);
                 if (btn) {
-                    if (f.toLowerCase() === filter) {
-                        btn.className = "px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-gold text-slate-950 transition-all";
-                    } else {
-                        btn.className = "px-4 py-2.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all";
-                    }
+                    btn.className = (f.toLowerCase() === filter) ? 
+                        "px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-gold text-slate-950 transition-all cursor-pointer" : 
+                        "px-4 py-2.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all cursor-pointer";
                 }
             });
             renderAdminBookings();
@@ -896,6 +833,66 @@ DOCTYPE html>
 
         window.exportBookingsCSV = function() {
             if (appointmentOrders.length === 0) {
-                alert('No booking data available to export.');
+                alert('No bookings to export.');
                 return;
             }
+            let csv = "ID,Name,Phone,Email,Service,Status,Date\n";
+            appointmentOrders.forEach(o => {
+                csv += `"${o.id}","${o.name}","${o.phone}","${o.email}","${o.service}","${o.status}","${o.date}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `ohemaa_bookings_${new Date().toISOString().slice(0,10)}.csv`;
+            link.click();
+        };
+
+        window.selectServiceAndScroll = function(service) {
+            // Switch to customer tab if currently in owner tab
+            switchTab('customer');
+            
+            const selectEl = document.getElementById('appttService');
+            if (selectEl) {
+                selectEl.value = service;
+            }
+            
+            const apptSection = document.getElementById('appointment');
+            if (apptSection) {
+                apptSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+
+        window.toggleMobileMenu = function() {
+            document.getElementById('mobileMenu')?.classList.toggle('hidden');
+        };
+
+        window.closeMobileMenu = function() {
+            document.getElementById('mobileMenu')?.classList.add('hidden');
+        };
+
+        window.toggleChatWindow = function() {
+            document.getElementById('chatWindow')?.classList.toggle('hidden');
+        };
+
+        window.handleChatKeyPress = function(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        };
+
+        window.sendChatMessage = function() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML += `<div class="bg-brand-blue text-white p-3 rounded-2xl ml-auto max-w-[80%]">${text}</div>`;
+            input.value = '';
+
+            setTimeout(() => {
+                chatMessages.innerHTML += `<div class="bg-white p-3 rounded-2xl border border-slate-200 text-slate-700 max-w-[80%]">Thank you! You can also call our helpline at 0806 530 8556.</div>`;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 800);
+        };
+    </script>
+</body>
+</html>
+
