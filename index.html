@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OHEMAA GLOBAL SERVICES - Premium Cleaning & Facility Command</title>
+    <title>OHEMAA GLOBAL SERVICES - Live Booking & Facility Command</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,10 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
-    
-    <!-- Firebase SDKs for Cloud Realtime Sync across ALL devices -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
     <script>
         tailwind.config = {
@@ -73,10 +69,51 @@
             border: 1px solid rgba(243, 168, 18, 0.25);
         }
     </style>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : {
+                apiKey: "AIzaSyDummyKeyForFallbackOnly",
+                authDomain: "ohemaa-global-services.firebaseapp.com",
+                databaseURL: "https://ohemaa-global-services-default-rtdb.firebaseio.com",
+                projectId: "ohemaa-global-services",
+                storageBucket: "ohemaa-global-services.appspot.com",
+                messagingSenderId: "1234567890",
+                appId: "1:1234567890:web:1234567890"
+            };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'ohemaa-global-prod';
+
+        window.firebaseDb = db;
+        window.appId = appId;
+        window.firebaseAuth = auth;
+
+        async function initAuth() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                if (window.setupFirestoreListener) window.setupFirestoreListener();
+            } catch (err) {
+                if (window.setupFirestoreListener) window.setupFirestoreListener();
+            }
+        }
+
+        initAuth();
+    </script>
 </head>
 <body class="bg-navy-950 text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-slate-900">
 
-    <!-- Top Header Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-amber-500/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
@@ -147,16 +184,14 @@
         </div>
     </nav>
 
-    <!-- MAIN CLIENT WEBSITE -->
     <main id="customerTab" class="block transition-all">
 
-        <!-- Hero Section -->
         <section id="hero" class="relative pt-32 pb-24 hero-bg text-white min-h-screen flex flex-col justify-center">
             <div class="max-w-5xl mx-auto px-6 text-center space-y-6">
 
                 <!-- Badge -->
                 <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-brand-gold/60 bg-navy-950/80 text-brand-gold text-xs font-black tracking-widest uppercase shadow-xl">
-                    <i class="fa-solid fa-crown text-xs"></i> INSTANT 24/7 ONLINE BOOKING ACTIVE
+                    <i class="fa-solid fa-crown text-xs"></i> INSTANT 24/7 GLOBAL ONLINE BOOKING ACTIVE
                 </div>
 
                 <!-- Title -->
@@ -165,12 +200,12 @@
                 </h1>
 
                 <p class="text-slate-300 text-sm sm:text-lg leading-relaxed max-w-3xl mx-auto font-light">
-                    Ohemaa Global Services is your world-class partner for post-construction, residential, commercial, and facility upkeep across Lagos and beyond. Book directly below in seconds.
+                    Ohemaa Global Services is your world-class partner for post-construction, residential, commercial, and facility upkeep across Lagos, Abuja, Port Harcourt, and worldwide. Book directly below in seconds.
                 </p>
 
                 <!-- Location Header -->
                 <div class="text-brand-gold text-xs font-bold flex items-center justify-center gap-2 pt-2">
-                    <i class="fa-solid fa-location-dot"></i> Along Abraham Adesanya, Ajah–Lagos • 0806 530 8556
+                    <i class="fa-solid fa-location-dot"></i> Along Abraham Adesanya, Ajah–Lagos • Hotline: 0806 530 8556
                 </div>
 
                 <!-- Booking Card -->
@@ -182,10 +217,10 @@
                         </div>
 
                         <h3 class="text-2xl sm:text-3xl font-black text-white font-serif mb-1">Book Your Service</h3>
-                        <p class="text-xs text-slate-300 mb-6 font-light">Fill details below and tap button. Your request will instantly process!</p>
+                        <p class="text-xs text-slate-300 mb-6 font-light">Fill details below and tap process. Your booking instantly appears in the owner command center permanently!</p>
 
                         <!-- BOOKING FORM -->
-                        <form id="heroAppointmentForm" onsubmit="handleAppointmentSubmit(event)" class="space-y-4">
+                        <form id="heroAppointmentForm" onsubmit="event.preventDefault(); processAppointmentSubmit();" class="space-y-4">
                             <div>
                                 <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Full Name *</label>
                                 <input type="text" id="appttName" required placeholder="e.g. Chief Adeleke Johnson" class="w-full px-4 py-3 bg-navy-950/90 border border-slate-700/80 rounded-xl text-white text-xs placeholder-slate-500 focus:ring-2 focus:ring-brand-gold focus:outline-none">
@@ -197,28 +232,35 @@
                                     <input type="tel" id="appttPhone" required placeholder="0801 234 5678" class="w-full px-4 py-3 bg-navy-950/90 border border-slate-700/80 rounded-xl text-white text-xs placeholder-slate-500 focus:ring-2 focus:ring-brand-gold focus:outline-none">
                                 </div>
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Email Address *</label>
-                                    <input type="email" id="appttEmail" required placeholder="name@domain.com" class="w-full px-4 py-3 bg-navy-950/90 border border-slate-700/80 rounded-xl text-white text-xs placeholder-slate-500 focus:ring-2 focus:ring-brand-gold focus:outline-none">
+                                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Email Address</label>
+                                    <input type="email" id="appttEmail" placeholder="name@domain.com (optional)" class="w-full px-4 py-3 bg-navy-950/90 border border-slate-700/80 rounded-xl text-white text-xs placeholder-slate-500 focus:ring-2 focus:ring-brand-gold focus:outline-none">
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Select Service Required *</label>
+                                    <select id="appttService" required class="w-full px-4 py-3 bg-navy-950/90 border border-slate-700/80 rounded-xl text-white text-xs focus:ring-2 focus:ring-brand-gold focus:outline-none">
+                                        <option value="Post-Construction Cleaning">Post-Construction Cleaning</option>
+                                        <option value="Residential Cleaning">Residential & Deep Cleaning</option>
+                                        <option value="Commercial Cleaning">Commercial & Office Cleaning</option>
+                                        <option value="Upholstery & Rug Cleaning">Upholstery, Mattress & Rug Cleaning</option>
+                                        <option value="Pest Control & Fumigation">Pest Control & Fumigation</option>
+                                        <option value="Facility Maintenance">Facility & Janitorial Maintenance</option>
+                                        <option value="Laundry & Dry Cleaning">Laundry & Dry Cleaning Services</option>
+                                        <option value="Chemical & Supplies Purchase">Chemical & Cleaning Products Supply</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Preferred Date *</label>
+                                    <input type="date" id="appttDate" required class="w-full px-4 py-3 bg-navy-950/90 border border-slate-700/80 rounded-xl text-white text-xs focus:ring-2 focus:ring-brand-gold focus:outline-none">
                                 </div>
                             </div>
                             
                             <div>
-                                <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Select Service Required *</label>
-                                <select id="appttService" required class="w-full px-4 py-3 bg-navy-950/90 border border-slate-700/80 rounded-xl text-white text-xs focus:ring-2 focus:ring-brand-gold focus:outline-none">
-                                    <option value="Post-Construction Cleaning">Post-Construction Cleaning</option>
-                                    <option value="Residential Cleaning">Residential & Deep Cleaning</option>
-                                    <option value="Commercial Cleaning">Commercial & Office Cleaning</option>
-                                    <option value="Upholstery & Rug Cleaning">Upholstery, Mattress & Rug Cleaning</option>
-                                    <option value="Pest Control & Fumigation">Pest Control & Fumigation</option>
-                                    <option value="Facility Maintenance">Facility & Janitorial Maintenance</option>
-                                    <option value="Laundry & Dry Cleaning">Laundry & Dry Cleaning Services</option>
-                                    <option value="Chemical & Supplies Purchase">Chemical & Cleaning Products Supply</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Address / Space Details *</label>
-                                <textarea id="appttMessage" rows="3" required placeholder="Describe property location, number of rooms or specific requirements..." class="w-full px-4 py-3 bg-navy-950/90 border border-slate-700/80 rounded-xl text-white text-xs placeholder-slate-500 focus:ring-2 focus:ring-brand-gold focus:outline-none"></textarea>
+                                <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">City & Location / Address *</label>
+                                <textarea id="appttMessage" rows="3" required placeholder="State city (e.g. Lagos, Abuja, PH), address, and room details..." class="w-full px-4 py-3 bg-navy-950/90 border border-slate-700/80 rounded-xl text-white text-xs placeholder-slate-500 focus:ring-2 focus:ring-brand-gold focus:outline-none"></textarea>
                             </div>
 
                             <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-400 via-brand-gold to-amber-500 hover:brightness-110 text-slate-950 font-black py-4 rounded-xl transition-all duration-200 text-xs tracking-widest uppercase shadow-xl flex items-center justify-center gap-2 cursor-pointer">
@@ -231,7 +273,6 @@
             </div>
         </section>
 
-        <!-- Services Section -->
         <section id="services" class="py-24 bg-white text-slate-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-16">
@@ -294,15 +335,14 @@
                 <div class="flex items-center justify-center space-x-2">
                     <span class="text-2xl font-black text-white font-serif tracking-widest">OHEMAA GLOBAL SERVICES</span>
                 </div>
-                <p class="text-xs text-slate-500 max-w-md mx-auto">Providing royal cleanliness standards across Ajah, Lekki, Victoria Island, and global clients worldwide.</p>
+                <p class="text-xs text-slate-500 max-w-md mx-auto">Providing royal cleanliness standards across Lagos, Abuja, Port Harcourt, and clients worldwide.</p>
                 <div class="pt-6 border-t border-slate-800 text-xs text-slate-600">
-                    &copy; 2026 Ohemaa Global Services. Live Multi-Device Sync Active.
+                    &copy; 2026 Ohemaa Global Services. Permanent Multi-Device Sync Active.
                 </div>
             </div>
         </footer>
     </main>
 
-    <!-- OWNER COMMAND CENTER TAB -->
     <main id="ownerTab" class="hidden min-h-screen pt-28 pb-20 bg-navy-950 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 
@@ -310,13 +350,16 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 p-8 rounded-3xl border border-brand-gold/30 shadow-2xl relative overflow-hidden">
                 <div class="z-10 space-y-2">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-black tracking-widest uppercase">
-                        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping"></span> Live Cloud Sync Active Across Devices
+                        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping"></span> Live Global Sync Active
                     </div>
                     <h1 class="text-3xl sm:text-5xl font-black text-white font-serif">Owner Command Center</h1>
-                    <p class="text-xs sm:text-sm text-slate-400 font-light">All customer bookings from any phone appear here instantly in real time.</p>
+                    <p class="text-xs sm:text-sm text-slate-400 font-light">All customer bookings are saved permanently across all devices and browsers.</p>
                 </div>
 
                 <div class="z-10 flex flex-wrap items-center gap-3">
+                    <button onclick="fetchCloudBookings()" class="px-4 py-3 rounded-xl bg-brand-gold text-slate-950 hover:bg-amber-400 text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-lg">
+                        <i class="fa-solid fa-rotate text-xs"></i> Refresh Bookings
+                    </button>
                     <button onclick="openChangePinModal()" class="px-4 py-3 rounded-xl bg-navy-950 hover:bg-navy-800 text-slate-200 text-xs font-bold border border-slate-700 transition-all flex items-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-key text-brand-gold"></i> Change PIN
                     </button>
@@ -494,15 +537,28 @@
                 <i class="fa-solid fa-circle-check"></i>
             </div>
             <h3 class="text-2xl font-black text-slate-900 font-serif mb-1">Booking Confirmed!</h3>
-            <p class="text-xs text-slate-600 mb-6 leading-relaxed">Your reservation details have been saved successfully and sent directly to Ohemaa Global dispatch team.</p>
+            <p class="text-xs text-slate-600 mb-6 leading-relaxed">Your reservation details have been saved permanently and synced to the Ohemaa Global dispatch team across all devices.</p>
             <div class="space-y-3">
-                <button id="whatsappRedirectBtn" onclick="openWhatsAppConfirmation()" class="w-full bg-emerald-600 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 cursor-pointer">
+                <button id="whatsappRedirectBtn" onclick="openWhatsAppConfirmation()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 cursor-pointer">
                     <i class="fa-brands fa-whatsapp text-lg"></i> Send via WhatsApp
                 </button>
-                <button onclick="closeConfirmationModal()" class="w-full bg-navy-950 text-brand-gold font-black py-3 rounded-xl text-xs uppercase tracking-widest cursor-pointer">
+                <button onclick="closeConfirmationModal()" class="w-full bg-navy-950 hover:bg-navy-900 text-brand-gold font-black py-3 rounded-xl text-xs uppercase tracking-widest cursor-pointer">
                     Done
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- CUSTOM ALERT MESSAGE DIALOG -->
+    <div id="customAlertModal" class="fixed inset-0 bg-navy-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-navy-900 border border-brand-gold/40 rounded-3xl max-w-sm w-full p-6 text-center text-white shadow-2xl space-y-4">
+            <div class="w-12 h-12 bg-amber-500/10 text-brand-gold rounded-2xl mx-auto flex items-center justify-center text-xl border border-brand-gold/30">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <p id="customAlertText" class="text-xs font-semibold leading-relaxed text-slate-200">Notice</p>
+            <button onclick="closeCustomAlert()" class="w-full bg-brand-gold hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider cursor-pointer">
+                Okay
+            </button>
         </div>
     </div>
 
@@ -536,65 +592,190 @@
         </button>
     </div>
 
-    <!-- MAIN JAVASCRIPT LOGIC -->
     <script>
-        // Universal Public Firebase Database for Instant Live Synchronization
-        const firebaseConfig = {
-            databaseURL: "https://ohemaa-global-services-default-rtdb.firebaseio.com/"
-        };
-        
-        // Initialize Firebase
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-        const db = firebase.database();
-        const bookingsRef = db.ref('ohemaa_bookings');
+        const FIREBASE_REST_ENDPOINT = "https://ohemaa-global-services-default-rtdb.firebaseio.com/bookings.json";
 
         let appointmentOrders = [];
         let isAuthenticated = false;
         let activeFilter = 'all';
         let latestBookingData = null;
 
-        // Listen for Real-Time Cloud Updates on ALL Devices
+        function showAlert(msg) {
+            const modal = document.getElementById('customAlertModal');
+            const text = document.getElementById('customAlertText');
+            if (modal && text) {
+                text.innerText = msg;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        window.closeCustomAlert = function() {
+            document.getElementById('customAlertModal')?.classList.add('hidden');
+        };
+
         window.addEventListener('DOMContentLoaded', () => {
-            bookingsRef.on('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    // Convert Firebase object to array sorted by timestamp descending
-                    appointmentOrders = Object.keys(data).map(key => ({
-                        firebaseKey: key,
-                        ...data[key]
-                    })).sort((a, b) => b.timestamp - a.timestamp);
-                } else {
-                    appointmentOrders = [];
-                }
-                renderAdminBookings();
-            });
+            const dateInput = document.getElementById('appttDate');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.value = today;
+            }
+
+            loadLocalStorageBookings();
+            fetchCloudBookings();
+            setInterval(fetchCloudBookings, 3000);
         });
 
-        // Form Submit Handler
-        window.handleAppointmentSubmit = function(e) {
-            e.preventDefault();
+        function loadLocalStorageBookings() {
+            try {
+                const stored = localStorage.getItem('ohemaa_local_bookings');
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        appointmentOrders = cleanAndNormalizeBookings(parsed);
+                        renderAdminBookings();
+                    }
+                }
+            } catch (e) {
+                console.warn('Local storage error:', e);
+            }
+        }
 
-            const name = document.getElementById('appttName').value.trim();
-            const phone = document.getElementById('appttPhone').value.trim();
-            const email = document.getElementById('appttEmail').value.trim();
-            const service = document.getElementById('appttService').value;
-            const message = document.getElementById('appttMessage').value.trim();
+        function saveLocalStorageBookings() {
+            try {
+                localStorage.setItem('ohemaa_local_bookings', JSON.stringify(appointmentOrders));
+            } catch (e) {
+                console.warn('Saving local storage failed:', e);
+            }
+        }
 
-            if (!name || !phone || !service || !message) {
-                alert('Please complete all required fields.');
+        function cleanAndNormalizeBookings(rawArray) {
+            if (!Array.isArray(rawArray)) return [];
+            return rawArray
+                .filter(item => item && (item.name || item.phone || item.message))
+                .map(item => {
+                    return {
+                        idKey: item.idKey || item.id || 'ORD-' + Math.floor(Math.random() * 1000000),
+                        id: item.id || item.idKey || 'ORD-' + Math.floor(Math.random() * 1000000),
+                        name: item.name || 'Valued Client',
+                        phone: item.phone || 'No Phone Provided',
+                        email: item.email || 'N/A',
+                        service: item.service || 'General Cleaning Service',
+                        message: item.message || 'No specific location/details entered.',
+                        date: item.date || new Date().toLocaleDateString(),
+                        time: item.time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                        status: item.status || 'New Lead',
+                        timestamp: item.timestamp || Date.now()
+                    };
+                });
+        }
+
+        window.setupFirestoreListener = function() {
+            if (!window.firebaseDb) return;
+            try {
+                const { collection, onSnapshot } = window;
+                onSnapshot(collection(window.firebaseDb, 'artifacts', window.appId || 'ohemaa-global-prod', 'public', 'data', 'bookings'), 
+                (snapshot) => {
+                    const docsData = [];
+                    snapshot.forEach(doc => {
+                        docsData.push({ idKey: doc.id, ...doc.data() });
+                    });
+                    if (docsData.length > 0) {
+                        const merged = [...appointmentOrders];
+                        docsData.forEach(d => {
+                            const idx = merged.findIndex(m => m.id === d.id || m.idKey === d.idKey);
+                            if (idx > -1) {
+                                merged[idx] = { ...merged[idx], ...d };
+                            } else {
+                                merged.push(d);
+                            }
+                        });
+                        appointmentOrders = cleanAndNormalizeBookings(merged.sort((a,b) => (b.timestamp||0) - (a.timestamp||0)));
+                        saveLocalStorageBookings();
+                        renderAdminBookings();
+                    }
+                }, 
+                (err) => {
+                    console.warn("Firestore snapshot listener notice:", err);
+                });
+            } catch(e) {
+                console.warn("Firestore setup fallback:", e);
+            }
+        };
+
+        window.fetchCloudBookings = function() {
+            fetch(FIREBASE_REST_ENDPOINT)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        const fetched = Object.keys(data).map(key => ({
+                            idKey: key,
+                            ...data[key]
+                        }));
+
+                        const merged = [...appointmentOrders];
+                        fetched.forEach(d => {
+                            const index = merged.findIndex(m => m.id === d.id || m.idKey === d.idKey);
+                            if (index > -1) {
+                                merged[index] = { ...merged[index], ...d };
+                            } else {
+                                merged.push(d);
+                            }
+                        });
+
+                        appointmentOrders = cleanAndNormalizeBookings(merged.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)));
+                        saveLocalStorageBookings();
+                    }
+                    renderAdminBookings();
+                })
+                .catch(err => {
+                    renderAdminBookings();
+                });
+        };
+
+        window.processAppointmentSubmit = function() {
+            const nameEl = document.getElementById('appttName');
+            const phoneEl = document.getElementById('appttPhone');
+            const emailEl = document.getElementById('appttEmail');
+            const serviceEl = document.getElementById('appttService');
+            const messageEl = document.getElementById('appttMessage');
+            const dateEl = document.getElementById('appttDate');
+
+            const name = nameEl ? nameEl.value.trim() : '';
+            const phone = phoneEl ? phoneEl.value.trim() : '';
+            const email = emailEl ? emailEl.value.trim() : '';
+            const service = serviceEl ? serviceEl.value : '';
+            const message = messageEl ? messageEl.value.trim() : '';
+            const date = dateEl ? dateEl.value : new Date().toLocaleDateString();
+
+            if (!name || name.length < 2) {
+                showAlert('Please enter your full name before submitting.');
                 return;
+            }
+
+            if (!phone || phone.length < 7) {
+                showAlert('Please enter a valid phone number so our team can reach you.');
+                return;
+            }
+
+            if (!message || message.length < 3) {
+                showAlert('Please enter your address or city location.');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-2"></i> Processing...';
             }
 
             const newOrder = {
                 id: 'ORD-' + Math.floor(100000 + Math.random() * 900000),
-                name,
-                phone,
-                email,
-                service,
-                message,
-                date: new Date().toLocaleDateString(),
+                name: name,
+                phone: phone,
+                email: email || 'N/A',
+                service: service,
+                message: message,
+                date: date,
                 time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                 status: 'New Lead',
                 timestamp: Date.now()
@@ -602,20 +783,69 @@
 
             latestBookingData = newOrder;
 
-            // Push directly to Firebase Cloud Realtime Database
-            bookingsRef.push(newOrder, (error) => {
-                if (error) {
-                    alert('Database error: ' + error.message);
-                } else {
-                    document.getElementById('heroAppointmentForm').reset();
-                    document.getElementById('confirmationModal').classList.remove('hidden');
+            // IMMEDIATE LOCAL SAVE
+            appointmentOrders.unshift(newOrder);
+            saveLocalStorageBookings();
+            renderAdminBookings();
+
+            // Push to Firestore Cloud Database
+            try {
+                if (window.firebaseDb) {
+                    const { collection, addDoc } = window;
+                    addDoc(collection(window.firebaseDb, 'artifacts', window.appId || 'ohemaa-global', 'public', 'data', 'bookings'), newOrder)
+                        .then(docRef => {
+                            newOrder.idKey = docRef.id;
+                            saveLocalStorageBookings();
+                        })
+                        .catch(e => console.warn('Firestore add notice:', e));
+                }
+            } catch(e) {
+                console.warn(e);
+            }
+
+            // Realtime Firebase REST Fallback
+            fetch(FIREBASE_REST_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newOrder)
+            })
+            .then(res => res.json())
+            .then(resData => {
+                if (resData && resData.name) {
+                    newOrder.idKey = resData.name;
+                    saveLocalStorageBookings();
+                }
+                finalizeOrderSubmission(newOrder);
+            })
+            .catch(err => {
+                finalizeOrderSubmission(newOrder);
+            })
+            .finally(() => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Confirm & Process Booking';
                 }
             });
         };
 
+        function finalizeOrderSubmission(order) {
+            // Clear inputs
+            const nameEl = document.getElementById('appttName');
+            const phoneEl = document.getElementById('appttPhone');
+            const emailEl = document.getElementById('appttEmail');
+            const messageEl = document.getElementById('appttMessage');
+            if (nameEl) nameEl.value = '';
+            if (phoneEl) phoneEl.value = '';
+            if (emailEl) emailEl.value = '';
+            if (messageEl) messageEl.value = '';
+
+            document.getElementById('confirmationModal').classList.remove('hidden');
+            renderAdminBookings();
+        }
+
         window.openWhatsAppConfirmation = function() {
             if (!latestBookingData) return;
-            const msg = `Hello Ohemaa Global Services!\n\nI want to book an appointment:\n- *Name:* ${latestBookingData.name}\n- *Phone:* ${latestBookingData.phone}\n- *Service:* ${latestBookingData.service}\n- *Details:* ${latestBookingData.message}\n\nPlease confirm quote and discount!`;
+            const msg = `Hello Ohemaa Global Services!\n\nI want to book an appointment:\n- *Name:* ${latestBookingData.name}\n- *Phone:* ${latestBookingData.phone}\n- *Service:* ${latestBookingData.service}\n- *Date:* ${latestBookingData.date}\n- *Details:* ${latestBookingData.message}\n\nPlease confirm my request!`;
             const url = `https://wa.me/2348065308556?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank');
         };
@@ -624,22 +854,27 @@
             document.getElementById('confirmationModal').classList.add('hidden');
         };
 
-        // Render Command Center UI
         window.renderAdminBookings = function() {
             const grid = document.getElementById('adminBookingsGrid');
             const searchVal = document.getElementById('adminSearchInput')?.value.toLowerCase() || '';
 
             let filtered = appointmentOrders.filter(order => {
-                const matchesSearch = (order.name || '').toLowerCase().includes(searchVal) || 
-                                     (order.phone || '').includes(searchVal) || 
-                                     (order.service || '').toLowerCase().includes(searchVal);
+                const nameStr = String(order.name || '').toLowerCase();
+                const phoneStr = String(order.phone || '').toLowerCase();
+                const serviceStr = String(order.service || '').toLowerCase();
+                const msgStr = String(order.message || '').toLowerCase();
+
+                const matchesSearch = nameStr.includes(searchVal) || 
+                                     phoneStr.includes(searchVal) || 
+                                     serviceStr.includes(searchVal) ||
+                                     msgStr.includes(searchVal);
                 
                 if (activeFilter === 'new') return matchesSearch && order.status === 'New Lead';
                 if (activeFilter === 'completed') return matchesSearch && order.status === 'Completed';
                 return matchesSearch;
             });
 
-            // Update Analytics
+            // Analytics KPI Updates
             document.getElementById('kpiTotalBookings').innerText = appointmentOrders.length;
             document.getElementById('kpiPendingCallbacks').innerText = appointmentOrders.filter(o => o.status === 'New Lead').length;
             document.getElementById('kpiCompletedJobs').innerText = appointmentOrders.filter(o => o.status === 'Completed').length;
@@ -661,50 +896,67 @@
                 const isNew = order.status === 'New Lead';
                 const statusColor = isNew ? 'bg-amber-500/10 text-amber-400 border-amber-500/30' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
                 
-                const cleanPhone = (order.phone || '').replace(/[^0-9]/g, '');
-                const formattedPhone = cleanPhone.startsWith('0') ? '234' + cleanPhone.slice(1) : cleanPhone;
-                const whatsappMsg = encodeURIComponent(`Hello ${order.name}, this is Ohemaa Global Services regarding your reservation for ${order.service}.`);
+                const rawPhone = String(order.phone || '');
+                const cleanPhoneDigits = rawPhone.replace(/[^0-9]/g, '');
+                
+                let waPhone = cleanPhoneDigits;
+                if (cleanPhoneDigits.startsWith('0')) {
+                    waPhone = '234' + cleanPhoneDigits.slice(1);
+                }
+
+                const waMessage = encodeURIComponent(`Hello ${order.name}, this is Ohemaa Global Services following up on your requested booking for "${order.service}". How can we assist you today?`);
 
                 return `
                     <div class="bg-navy-900 border border-slate-800 p-6 rounded-3xl shadow-xl space-y-4 flex flex-col justify-between hover:border-brand-gold/40 transition-all">
                         <div class="space-y-3">
                             <div class="flex justify-between items-center">
                                 <span class="text-[10px] px-3 py-1 rounded-full border ${statusColor} font-bold uppercase tracking-wider">${order.status || 'New Lead'}</span>
-                                <span class="text-[10px] text-slate-500 font-mono">${order.date || ''} ${order.time || ''}</span>
+                                <span class="text-[10px] text-slate-400 font-mono"><i class="fa-regular fa-calendar-check mr-1 text-brand-gold"></i>${order.date || ''}</span>
                             </div>
 
                             <div class="pt-1">
                                 <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Client Name</span>
                                 <h3 class="text-xl font-black text-white leading-tight mt-0.5 font-serif">${order.name}</h3>
-                                <p class="text-xs font-bold text-brand-gold mt-1"><i class="fa-solid fa-broom text-[10px] mr-1"></i>${order.service}</p>
+                                
+                                <div class="flex items-center gap-2 mt-2 bg-navy-950/80 px-3 py-2 rounded-xl border border-slate-800 text-xs">
+                                    <i class="fa-solid fa-phone text-brand-gold"></i>
+                                    <span class="font-mono font-bold text-slate-200">${rawPhone}</span>
+                                    <button onclick="copyToClipboard('${rawPhone}')" title="Copy Number" class="ml-auto text-slate-500 hover:text-brand-gold text-xs">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                </div>
+
+                                <p class="text-xs font-bold text-brand-gold mt-2"><i class="fa-solid fa-broom text-[10px] mr-1"></i>${order.service}</p>
                             </div>
 
                             <div class="bg-navy-950 p-4 rounded-2xl border border-slate-800/80 space-y-2 text-xs">
-                                <p class="text-slate-300 font-medium"><i class="fa-solid fa-envelope mr-1.5 text-brand-gold"></i> ${order.email}</p>
-                                <p class="text-slate-400 text-[11px] leading-relaxed pt-2 border-t border-slate-800">
+                                <p class="text-slate-300 font-medium"><i class="fa-solid fa-envelope mr-1.5 text-brand-gold"></i> ${order.email || 'N/A'}</p>
+                                <div class="text-slate-300 text-[11px] leading-relaxed pt-2 border-t border-slate-800">
+                                    <span class="text-slate-500 block font-bold text-[9px] uppercase tracking-wider mb-0.5">Location & Details:</span>
                                     "${order.message}"
-                                </p>
+                                </div>
                             </div>
                         </div>
 
                         <div class="pt-3 border-t border-slate-800 space-y-3">
                             <div class="flex items-center justify-between gap-2">
-                                <select onchange="updateOrderStatus('${order.firebaseKey}', this.value)" class="bg-navy-950 text-slate-300 border border-slate-800 text-xs px-3 py-2 rounded-xl focus:outline-none">
+                                <select onchange="updateOrderStatus('${order.idKey || order.id}', this.value)" class="bg-navy-950 text-slate-300 border border-slate-800 text-xs px-3 py-2 rounded-xl focus:outline-none">
                                     <option value="New Lead" ${order.status === 'New Lead' ? 'selected' : ''}>New Lead</option>
                                     <option value="Contacted" ${order.status === 'Contacted' ? 'selected' : ''}>Contacted</option>
                                     <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option>
                                 </select>
 
-                                <button onclick="deleteBooking('${order.firebaseKey}')" class="text-slate-500 hover:text-rose-400 text-xs p-2 cursor-pointer">
+                                <button onclick="deleteBooking('${order.idKey || order.id}')" title="Delete Booking" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 p-2.5 rounded-xl text-xs transition-all cursor-pointer flex items-center gap-1">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             </div>
 
                             <div class="grid grid-cols-2 gap-2">
-                                <button onclick="triggerDirectCall('${order.phone}')" class="bg-brand-gold hover:bg-amber-500 text-slate-950 font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md cursor-pointer">
+                                <a href="tel:${rawPhone}" class="bg-brand-gold hover:bg-amber-500 text-slate-950 font-black py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md cursor-pointer transition-all">
                                     <i class="fa-solid fa-phone"></i> Call Direct
-                                </button>
-                                <a href="https://wa.me/${formattedPhone}?text=${whatsappMsg}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
+                                </a>
+
+                                <a href="https://wa.me/${waPhone}?text=${waMessage}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md transition-all">
                                     <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
                                 </a>
                             </div>
@@ -714,21 +966,46 @@
             }).join('');
         };
 
-        window.updateOrderStatus = function(firebaseKey, newStatus) {
-            if (firebaseKey) {
-                db.ref('ohemaa_bookings/' + firebaseKey).update({ status: newStatus });
-            }
+        window.copyToClipboard = function(text) {
+            if (!text) return;
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showAlert('Copied phone number: ' + text);
         };
 
-        window.deleteBooking = function(firebaseKey) {
-            if (confirm("Are you sure you want to delete this booking?")) {
-                if (firebaseKey) {
-                    db.ref('ohemaa_bookings/' + firebaseKey).remove();
-                }
+        window.updateOrderStatus = function(idKey, newStatus) {
+            const order = appointmentOrders.find(o => o.idKey === idKey || o.id === idKey);
+            if (order) {
+                order.status = newStatus;
+                saveLocalStorageBookings();
             }
+
+            if (idKey && !idKey.startsWith('ORD-')) {
+                fetch(`https://ohemaa-global-services-default-rtdb.firebaseio.com/bookings/${idKey}.json`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                }).catch(err => console.warn('Status update error:', err));
+            }
+            renderAdminBookings();
         };
 
-        // Navigation Tabs
+        window.deleteBooking = function(idKey) {
+            appointmentOrders = appointmentOrders.filter(o => o.idKey !== idKey && o.id !== idKey);
+            saveLocalStorageBookings();
+
+            if (idKey && !idKey.startsWith('ORD-')) {
+                fetch(`https://ohemaa-global-services-default-rtdb.firebaseio.com/bookings/${idKey}.json`, {
+                    method: 'DELETE'
+                }).catch(err => console.warn('Delete error:', err));
+            }
+            renderAdminBookings();
+        };
+
         window.switchTab = function(tabName) {
             const customerTab = document.getElementById('customerTab');
             const ownerTab = document.getElementById('ownerTab');
@@ -783,7 +1060,7 @@
                 document.getElementById('adminPinInput').value = '';
                 switchTab('owner');
             } else {
-                alert('Invalid PIN code.');
+                showAlert('Invalid PIN code.');
             }
         };
 
@@ -794,11 +1071,11 @@
             
             if (phone.includes('08065308556') || phone === '08065308556') {
                 localStorage.setItem('ohemaa_admin_pin_v4', newPin);
-                alert('PIN successfully reset! You can now log in.');
+                showAlert('PIN successfully reset! You can now log in.');
                 closeForgotPinModal();
                 openAdminModal();
             } else {
-                alert('Incorrect business helpline number. Use 08065308556.');
+                showAlert('Incorrect business helpline number. Use 08065308556.');
             }
         };
 
@@ -810,22 +1087,16 @@
 
             if (currentPin === savedPin) {
                 localStorage.setItem('ohemaa_admin_pin_v4', newPin);
-                alert('PIN successfully updated!');
+                showAlert('PIN successfully updated!');
                 closeChangePinModal();
             } else {
-                alert('Current PIN is incorrect.');
+                showAlert('Current PIN is incorrect.');
             }
         };
 
         window.lockAdminPortal = function() {
             isAuthenticated = false;
             switchTab('customer');
-        };
-
-        window.triggerDirectCall = function(phone) {
-            if (!phone) return;
-            const cleanNum = phone.replace(/[^0-9+]/g, '');
-            window.location.href = `tel:${cleanNum}`;
         };
 
         window.setFilter = function(filter) {
@@ -843,12 +1114,12 @@
 
         window.exportBookingsCSV = function() {
             if (appointmentOrders.length === 0) {
-                alert('No bookings to export.');
+                showAlert('No bookings to export.');
                 return;
             }
-            let csv = "ID,Name,Phone,Email,Service,Status,Date\n";
+            let csv = "ID,Name,Phone,Email,Service,Status,Date,Message\n";
             appointmentOrders.forEach(o => {
-                csv += `"${o.id}","${o.name}","${o.phone}","${o.email}","${o.service}","${o.status}","${o.date}"\n`;
+                csv += `"${o.id}","${o.name}","${o.phone}","${o.email}","${o.service}","${o.status}","${o.date}","${o.message}"\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv' });
             const link = document.createElement('a');
@@ -897,7 +1168,7 @@
             input.value = '';
 
             setTimeout(() => {
-                chatMessages.innerHTML += `<div class="bg-white p-3 rounded-2xl border border-slate-200 text-slate-700 max-w-[80%]">Thank you! You can also call our helpline at 0806 530 8556.</div>`;
+                chatMessages.innerHTML += `<div class="bg-white p-3 rounded-2xl border border-slate-200 text-slate-700 max-w-[80%]">Thank you! You can also call our helpline directly at 0806 530 8556.</div>`;
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }, 800);
         };
