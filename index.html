@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OHEMAA GLOBAL SERVICES - Live Booking & Facility Command</title>
+    <title>OHEMAA GLOBAL SERVICES - Live Booking & Command Center</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome 6 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -31,7 +31,7 @@
                     },
                     fontFamily: {
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
+                        serif: ['Cinzel', 'Playfair Display', 'serif'],
                     }
                 }
             }
@@ -39,6 +39,15 @@
     </script>
     
     <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Cinzel', 'Playfair Display', serif !important;
+            letter-spacing: -0.01em;
+        }
+
         .glass-nav {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -71,7 +80,7 @@
             0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
             25% { transform: translate(-48%, -49%) scale(1.03) rotate(0.8deg); }
             50% { transform: translate(-52%, -51%) scale(1.01) rotate(-0.8deg); }
-            75% { transform: translate(-49%, -50%) scale(1.04) rotate(0.5deg); }
+            75% { transform: translate(-49%, -50%) scale(0.5deg); }
             100% { transform: translate(-51%, -49%) scale(1.02) rotate(-0.5deg); }
         }
 
@@ -136,7 +145,6 @@
                         <i class="fa-solid fa-gem"></i> Client Portal
                     </button>
                     <a href="#about" class="text-slate-700 hover:text-blue-700 px-3 py-2 transition-all">About Us</a>
-                    <a href="#founder" class="text-slate-700 hover:text-blue-700 px-3 py-2 transition-all">Founder</a>
                     <a href="#services" class="text-slate-700 hover:text-blue-700 px-3 py-2 transition-all">Services</a>
                     <a href="#gallery" class="text-slate-700 hover:text-blue-700 px-3 py-2 transition-all">Gallery</a>
                     <button id="navBtnOwner" onclick="attemptAdminAccess()" class="text-slate-700 hover:text-blue-700 px-4 py-2 rounded-xl border border-slate-200 hover:border-blue-900/30 transition-all flex items-center gap-2 relative cursor-pointer bg-slate-50">
@@ -165,7 +173,6 @@
                 <i class="fa-solid fa-gem text-blue-700"></i> Client Website
             </button>
             <a href="#about" onclick="closeMobileMenu()" class="block w-full text-left py-2 font-medium text-slate-700 text-sm">About Us & Expertise</a>
-            <a href="#founder" onclick="closeMobileMenu()" class="block w-full text-left py-2 font-medium text-slate-700 text-sm">Founder</a>
             <a href="#services" onclick="closeMobileMenu()" class="block w-full text-left py-2 font-medium text-slate-700 text-sm">All Services</a>
             <a href="#gallery" onclick="closeMobileMenu()" class="block w-full text-left py-2 font-medium text-slate-700 text-sm">Photo Gallery</a>
             <button onclick="attemptAdminAccess(); closeMobileMenu()" class="block w-full text-left py-2 font-bold text-blue-900 text-sm flex items-center justify-between cursor-pointer">
@@ -196,15 +203,15 @@
             <div class="max-w-5xl mx-auto px-6 text-center space-y-6 hero-content">
 
                 <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-blue-900/40 bg-white/95 text-blue-900 text-[11px] font-black tracking-widest uppercase shadow-xl mt-4">
-                    <i class="fa-solid fa-shield-halved text-xs text-blue-700"></i> PROFESSIONAL CLEANING, CHEMICAL SUPPLY & BUILDING EXPERTS
+                    <i class="fa-solid fa-shield-halved text-xs text-blue-700"></i> PROFESSIONAL CLEANING & GENERAL CONTRACTS
                 </div>
 
                 <h1 class="text-4xl sm:text-7xl font-black text-slate-900 leading-tight font-serif tracking-tight">
-                    Cleanliness Crafted To <span class="blue-gradient-text">Perfection</span>.
+                    Professional Cleaning & <span class="blue-gradient-text">General Contracts</span>.
                 </h1>
 
                 <p class="text-slate-700 text-sm sm:text-lg leading-relaxed max-w-3xl mx-auto font-light">
-                    Ohemaa Global Services is your trusted partner for professional cleaning, routine office upkeep, pest control, chemical supply, and building services across Lagos, Abuja, Port Harcourt, and worldwide. Book directly below in seconds.
+                    Ohemaa Global Services provides premier residential cleaning, deep office maintenance, fumigation, janitorial solutions, and general contract execution across Lagos, Abuja, Port Harcourt, and nationwide.
                 </p>
 
                 <div class="text-blue-900 text-xs font-bold flex items-center justify-center gap-2 pt-2">
@@ -215,52 +222,52 @@
                     <div class="glass-card p-6 sm:p-10 rounded-3xl border border-blue-900/20 shadow-2xl relative bg-white">
                         
                         <div class="absolute -top-3.5 right-8 bg-gradient-to-r from-blue-700 to-slate-900 text-white font-black text-[10px] px-4 py-1.5 rounded-full uppercase tracking-wider shadow-xl">
-                            50% OFF PROMO ACTIVE
+                            PROMO ACTIVE
                         </div>
 
-                        <h3 class="text-2xl sm:text-3xl font-black text-slate-900 font-serif mb-1">Book Your Service</h3>
+                        <h3 class="text-2xl sm:text-3xl font-black text-slate-900 font-serif mb-1">Book Service or Contract</h3>
                         <p class="text-xs text-slate-600 mb-6 font-light">Fill details below and tap process. Your booking instantly appears in the owner command center permanently!</p>
 
                         <form id="heroAppointmentForm" onsubmit="event.preventDefault(); processAppointmentSubmit();" class="space-y-4">
                             <div>
-                                <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Full Name *</label>
-                                <input type="text" id="appttName" required placeholder="e.g. Chief Adeleke Johnson" class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                                <label class="block text-[11px] font-bold uppercase text-slate-700 mb-1 tracking-wider">Full Name *</label>
+                                <input type="text" id="appttName" required placeholder="Enter your full name" class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Phone / WhatsApp *</label>
-                                    <input type="tel" id="appttPhone" required placeholder="0801 234 5678" class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                                    <label class="block text-[11px] font-bold uppercase text-slate-700 mb-1 tracking-wider">Phone / WhatsApp *</label>
+                                    <input type="tel" id="appttPhone" required placeholder="08012345678" class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
                                 </div>
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Email Address</label>
-                                    <input type="email" id="appttEmail" placeholder="name@domain.com (optional)" class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                                    <label class="block text-[11px] font-bold uppercase text-slate-700 mb-1 tracking-wider">Email Address</label>
+                                    <input type="email" id="appttEmail" placeholder="name@example.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
                                 </div>
                             </div>
-                            
+
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Select Service Required *</label>
+                                    <label class="block text-[11px] font-bold uppercase text-slate-700 mb-1 tracking-wider">Select Service Required *</label>
                                     <select id="appttService" required class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                                        <option value="New Building & Post-Construction Cleaning">New Building & Post-Construction Cleaning</option>
-                                        <option value="Deep Home Cleaning">Deep Home Cleaning</option>
-                                        <option value="Office & Business Upkeep">Office & Business Upkeep</option>
-                                        <option value="Sofa, Rug & Carpet Cleaning">Sofa, Rug & Carpet Cleaning</option>
-                                        <option value="Pest Control & Fumigation">Pest Control & Fumigation</option>
-                                        <option value="Cleaning Product & Chemical Supply">Cleaning Product & Chemical Supply</option>
-                                        <option value="Building & Renovation Services">Building & Renovation Services</option>
+                                        <option value="Residential Deep Cleaning">Residential Deep Cleaning</option>
+                                        <option value="Commercial & Office Cleaning">Commercial & Office Cleaning</option>
+                                        <option value="Fumigation & Pest Control">Fumigation & Pest Control</option>
+                                        <option value="Move-In / Move-Out Cleaning">Move-In / Move-Out Cleaning</option>
+                                        <option value="Housekeeping & Maid Service">Housekeeping & Maid Service</option>
+                                        <option value="Laundry & Dry Cleaning">Laundry & Dry Cleaning Service</option>
+                                        <option value="Event Cleanup & Support">Event Cleanup & Pre/Post Support</option>
+                                        <option value="General Contracts & Building Execution">General Contracts & Building Execution</option>
                                     </select>
                                 </div>
-
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Preferred Date *</label>
+                                    <label class="block text-[11px] font-bold uppercase text-slate-700 mb-1 tracking-wider">Preferred Date *</label>
                                     <input type="date" id="appttDate" required class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
                                 </div>
                             </div>
-                            
+
                             <div>
-                                <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">City & Location / Address *</label>
-                                <textarea id="appttMessage" rows="3" required placeholder="State city (e.g. Lagos, Abuja, PH), address, and project/room details..." class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:outline-none"></textarea>
+                                <label class="block text-[11px] font-bold uppercase text-slate-700 mb-1 tracking-wider">City & Location / Project Scope *</label>
+                                <textarea id="appttMessage" rows="3" required placeholder="State city (e.g. Lagos, Abuja, PH), address, property size, and specific requirements..." class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:outline-none"></textarea>
                             </div>
 
                             <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-blue-700 via-blue-800 to-slate-900 hover:brightness-110 text-white font-black py-4 rounded-xl transition-all duration-200 text-xs tracking-widest uppercase shadow-xl flex items-center justify-center gap-2 cursor-pointer">
@@ -273,88 +280,35 @@
             </div>
         </section>
 
-        <section id="founder" class="py-24 bg-white border-t border-slate-200 text-slate-900 relative overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <span class="text-xs font-black text-blue-700 tracking-[0.25em] uppercase block mb-2">Executive Leadership</span>
-                    <h2 class="text-3xl sm:text-5xl font-black font-serif blue-gradient-text">Founder & CEO</h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-blue-700 to-slate-900 mx-auto mt-4 rounded-full"></div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-6xl mx-auto">
-                    <div class="lg:col-span-5 flex justify-center">
-                        <div class="relative group max-w-sm w-full">
-                            <div class="absolute -inset-1.5 bg-gradient-to-r from-blue-600 via-blue-900 to-slate-900 rounded-3xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
-                            <div class="relative rounded-3xl overflow-hidden border-2 border-blue-900/20 shadow-2xl bg-white p-2">
-                                <img src="image_6.png" alt="Founder & CEO - Ohemaa Global Services" class="w-full h-auto object-cover rounded-2xl hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=800';">
-                                <div class="absolute bottom-2 inset-x-2 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent p-6 text-white rounded-b-2xl">
-                                    <h4 class="text-xl font-bold font-serif leading-tight">Founder & CEO</h4>
-                                    <p class="text-xs text-blue-300 font-medium">Ohemaa Global Services</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-7 space-y-6 text-left">
-                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-900/20 text-blue-900 text-xs font-bold uppercase tracking-wider">
-                            <i class="fa-solid fa-shield-halved text-xs text-blue-700"></i> Visionary Leadership
-                        </div>
-
-                        <h3 class="text-2xl sm:text-3xl font-black font-serif text-slate-900 leading-snug">
-                            "Committed to providing top-quality cleaning, maintenance, and chemical supply solutions."
-                        </h3>
-
-                        <div class="space-y-4 text-slate-700 text-sm leading-relaxed font-light">
-                            <p>
-                                At <strong class="text-slate-900 font-semibold">Ohemaa Global Services</strong>, we believe that an immaculate environment is the foundation for healthy living, elevated productivity, and lasting legacy. Whether we are transforming newly built sites into pristine spaces or distributing industrial-grade cleaning chemicals, our commitment remains unshakeable.
-                            </p>
-                            <p>
-                                We combine professional technologies, rigorous quality control, and a deeply passionate workforce to ensure every service and product we deliver meets top-tier standards across Lagos, Abuja, Port Harcourt, and beyond.
-                            </p>
-                            <p>
-                                Thank you for entrusting us with your residential and corporate spaces. We look forward to exceeding your expectations.
-                            </p>
-                        </div>
-
-                        <div class="pt-6 border-t border-slate-200 flex flex-wrap items-center gap-4">
-                            <a href="#appointment" class="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-700 via-blue-800 to-slate-900 text-white font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all shadow-lg inline-flex items-center gap-1.5">
-                                <i class="fa-solid fa-calendar-check mr-1.5"></i> Schedule Appointment
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="about" class="py-24 bg-slate-50 text-slate-800 border-t border-b border-slate-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     
                     <div class="space-y-6">
                         <span class="text-xs font-black text-blue-700 tracking-[0.2em] uppercase block">About Ohemaa Global Services</span>
-                        <h2 class="text-3xl sm:text-5xl font-black text-slate-900 font-serif leading-tight">Reliable Services Built Around Your Needs</h2>
+                        <h2 class="text-3xl sm:text-5xl font-black text-slate-900 font-serif leading-tight">Cleaning Experts & General Contractors</h2>
                         
                         <p class="text-slate-700 text-sm leading-relaxed font-light">
-                            Founded on a commitment to superior standards, Ohemaa Global Services is a leading name in facility maintenance, professional cleaning, chemical supply, and building projects. With operational reach across Lagos, Abuja, and Port Harcourt, we cater to residential homes, corporate offices, schools, estates, and industrial facilities.
+                            Ohemaa Global Services delivers high-standard residential deep cleaning, commercial janitorial solutions, pest control, housekeeping, and general contracting execution. We transform residential and commercial spaces into spotless, healthy environments.
                         </p>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                                 <div class="text-blue-900 text-lg font-black font-serif mb-1">Our Vision</div>
-                                <p class="text-xs text-slate-600">To be the foremost customer-centric company in Nigeria providing quality and affordable products and services for current and future generations.</p>
+                                <p class="text-xs text-slate-600">To be the trusted benchmark for residential sanitation, corporate facility care, and contract management in Nigeria.</p>
                             </div>
                             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                                 <div class="text-blue-900 text-lg font-black font-serif mb-1">Our Mission</div>
-                                <p class="text-xs text-slate-600">To contribute to sustainable environmental and infrastructural projects that engender socio-economic development.</p>
+                                <p class="text-xs text-slate-600">To provide reliable cleaning and general contract execution using modern equipment, eco-safe agents, and trained personnel.</p>
                             </div>
                         </div>
 
                         <div class="pt-2">
-                            <div class="text-xs font-bold uppercase text-blue-900 tracking-widest mb-3">Core Values:</div>
+                            <div class="text-xs font-bold uppercase text-blue-900 tracking-widest mb-3">Core Commitments:</div>
                             <div class="flex flex-wrap gap-3">
-                                <span class="px-4 py-2 rounded-xl bg-blue-50 text-blue-900 border border-blue-900/20 text-xs font-bold">Efficiency & Quality</span>
-                                <span class="px-4 py-2 rounded-xl bg-blue-50 text-blue-900 border border-blue-900/20 text-xs font-bold">Professionalism & Customer Success</span>
-                                <span class="px-4 py-2 rounded-xl bg-blue-50 text-blue-900 border border-blue-900/20 text-xs font-bold">Sustainability</span>
+                                <span class="px-4 py-2 rounded-xl bg-blue-50 text-blue-900 border border-blue-900/20 text-xs font-bold">Eco-Safe Products</span>
+                                <span class="px-4 py-2 rounded-xl bg-blue-50 text-blue-900 border border-blue-900/20 text-xs font-bold">100% Satisfaction Guarantee</span>
+                                <span class="px-4 py-2 rounded-xl bg-blue-50 text-blue-900 border border-blue-900/20 text-xs font-bold">Certified Professional Crew</span>
                             </div>
                         </div>
                     </div>
@@ -362,26 +316,26 @@
                     <div class="relative">
                         <div class="glass-card p-8 sm:p-10 rounded-3xl border border-blue-900/20 space-y-6 shadow-2xl relative overflow-hidden bg-white">
                             <div class="absolute -right-10 -bottom-10 opacity-10 text-blue-700 text-9xl">
-                                <i class="fa-solid fa-award"></i>
+                                <i class="fa-solid fa-sparkles"></i>
                             </div>
                             
-                            <h3 class="text-2xl font-black text-slate-900 font-serif">The Ohemaa Difference</h3>
+                            <h3 class="text-2xl font-black text-slate-900 font-serif">Why Partner With Ohemaa</h3>
                             <p class="text-xs text-slate-700 leading-relaxed">
-                                Your visit suggests you're seeking reliable construction, cleaning, or chemical supply services — and you're in the right place. We combine state-of-the-art equipment, eco-friendly products, and a dedicated team to deliver unmatched cleanliness and customer satisfaction.
+                                From routine housekeeping to specialized corporate sanitation and building contracts, our dedicated teams are equipped to deliver spotless standards with maximum safety and efficiency.
                             </p>
 
                             <div class="space-y-3 pt-2">
                                 <div class="flex items-start gap-3">
                                     <div class="w-6 h-6 rounded-full bg-blue-700 text-white flex items-center justify-center text-xs font-bold mt-0.5 shrink-0">✓</div>
-                                    <p class="text-xs text-slate-700"><strong>Guaranteed Satisfaction:</strong> If you're not satisfied, we respond and resolve the issue within one business day.</p>
+                                    <p class="text-xs text-slate-700"><strong>Deep Clean & Sanitization:</strong> Comprehensive floor scrub, kitchen degreasing, bathroom disinfection, and window cleaning.</p>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="w-6 h-6 rounded-full bg-blue-700 text-white flex items-center justify-center text-xs font-bold mt-0.5 shrink-0">✓</div>
-                                    <p class="text-xs text-slate-700"><strong>Advanced Science & Tech:</strong> Color-coded microfiber cloths, HEPA-grade vacuums, and hospital-grade disinfectants.</p>
+                                    <p class="text-xs text-slate-700"><strong>Fumigation & Pest Control:</strong> Non-toxic, eco-friendly pest eradication for residential and corporate properties.</p>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="w-6 h-6 rounded-full bg-blue-700 text-white flex items-center justify-center text-xs font-bold mt-0.5 shrink-0">✓</div>
-                                    <p class="text-xs text-slate-700"><strong>Fully Compliant:</strong> Fully compliant with government regulations with verified professional staff.</p>
+                                    <p class="text-xs text-slate-700"><strong>General Contracts Execution:</strong> Renovations, interior decor, material procurement, site logistics, and facility development support.</p>
                                 </div>
                             </div>
                         </div>
@@ -394,156 +348,135 @@
         <section id="services" class="py-24 bg-white text-slate-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-16">
-                    <span class="text-xs font-black text-blue-700 tracking-[0.2em] uppercase block mb-2">Exclusive Offerings</span>
-                    <h2 class="text-3xl sm:text-5xl font-black text-slate-900 font-serif">Tailored Service Solutions</h2>
+                    <span class="text-xs font-black text-blue-700 tracking-[0.2em] uppercase block mb-2">Our Comprehensive Solutions</span>
+                    <h2 class="text-3xl sm:text-5xl font-black text-slate-900 font-serif">Services & Offerings</h2>
                     <div class="w-16 h-1 bg-blue-700 mx-auto mt-4 rounded-full"></div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
                     <div class="bg-slate-50 rounded-3xl border border-slate-200 hover:border-blue-700 hover:shadow-2xl transition-all group overflow-hidden flex flex-col justify-between">
                         <div>
-                            <div class="relative h-48 w-full overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=800" alt="New Building & Post-Construction Cleaning" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="relative h-52 w-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=800" alt="Residential Deep Cleaning" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
                                 <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-blue-900/90 px-3 py-1 rounded-full border border-blue-500/30">
-                                    <i class="fa-solid fa-building-circle-check text-blue-300 mr-1"></i> New Building Clean
+                                    <i class="fa-solid fa-house-sparkles text-amber-400 mr-1"></i> Home Sanitation
                                 </span>
                             </div>
                             <div class="p-6">
-                                <h3 class="font-bold text-slate-900 text-lg mb-2">New Building & Post-Construction Cleaning</h3>
-                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Complete paint, dust, silicone, and grout clearing for brand new homes and commercial builds.</p>
+                                <h3 class="font-bold text-slate-900 text-xl mb-2">Residential Deep Cleaning</h3>
+                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Thorough deep cleaning for apartments, duplexes, and estates. Floor scrubbing, grease extraction, furniture steam vacuuming, and complete kitchen/bathroom sanitation.</p>
                             </div>
                         </div>
                         <div class="px-6 pb-6 pt-0">
-                            <button onclick="selectServiceAndScroll('New Building & Post-Construction Cleaning')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
-                                Book Service <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            <button onclick="selectServiceAndScroll('Residential Deep Cleaning')" class="w-full bg-slate-900 text-white py-3.5 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
+                                Book Home Deep Clean <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
                         </div>
                     </div>
 
                     <div class="bg-slate-50 rounded-3xl border border-slate-200 hover:border-blue-700 hover:shadow-2xl transition-all group overflow-hidden flex flex-col justify-between">
                         <div>
-                            <div class="relative h-48 w-full overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=800" alt="Deep Home Cleaning" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="relative h-52 w-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800" alt="Commercial Cleaning" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
                                 <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-blue-900/90 px-3 py-1 rounded-full border border-blue-500/30">
-                                    <i class="fa-solid fa-house-sparkles text-blue-300 mr-1"></i> Home Sanitization
+                                    <i class="fa-solid fa-building text-amber-400 mr-1"></i> Corporate Care
                                 </span>
                             </div>
                             <div class="p-6">
-                                <h3 class="font-bold text-slate-900 text-lg mb-2">Deep Home Cleaning</h3>
-                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Comprehensive sanitization of kitchens, marble floors, walls, and hard-to-reach living spaces.</p>
+                                <h3 class="font-bold text-slate-900 text-xl mb-2">Commercial & Office Cleaning</h3>
+                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Routine and deep janitorial maintenance for offices, plazas, corporate headquarters, and retail outlets tailored to fit your operational hours.</p>
                             </div>
                         </div>
                         <div class="px-6 pb-6 pt-0">
-                            <button onclick="selectServiceAndScroll('Deep Home Cleaning')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
-                                Book Service <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            <button onclick="selectServiceAndScroll('Commercial & Office Cleaning')" class="w-full bg-slate-900 text-white py-3.5 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
+                                Book Office Clean <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
                         </div>
                     </div>
 
                     <div class="bg-slate-50 rounded-3xl border border-slate-200 hover:border-blue-700 hover:shadow-2xl transition-all group overflow-hidden flex flex-col justify-between">
                         <div>
-                            <div class="relative h-48 w-full overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1613963931023-5dc59437c8a6?auto=format&fit=crop&q=80&w=800" alt="Office & Business Upkeep" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="relative h-52 w-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1632833239869-a37e3a5806d2?auto=format&fit=crop&q=80&w=800" alt="Fumigation & Pest Control" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
                                 <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-blue-900/90 px-3 py-1 rounded-full border border-blue-500/30">
-                                    <i class="fa-solid fa-broom text-blue-300 mr-1"></i> Facility Upkeep
+                                    <i class="fa-solid fa-bug text-amber-400 mr-1"></i> Pest Eradication
                                 </span>
                             </div>
                             <div class="p-6">
-                                <h3 class="font-bold text-slate-900 text-lg mb-2">Office & Business Upkeep</h3>
-                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Routine contract cleaning and facility upkeep for corporate offices, malls, and institutions.</p>
+                                <h3 class="font-bold text-slate-900 text-xl mb-2">Fumigation & Pest Control</h3>
+                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Safe, odor-managed, eco-friendly fumigation treatment against rodents, termites, mosquitoes, cockroaches, and bed bugs for homes and businesses.</p>
                             </div>
                         </div>
                         <div class="px-6 pb-6 pt-0">
-                            <button onclick="selectServiceAndScroll('Office & Business Upkeep')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
-                                Book Service <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            <button onclick="selectServiceAndScroll('Fumigation & Pest Control')" class="w-full bg-slate-900 text-white py-3.5 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
+                                Book Fumigation <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
                         </div>
                     </div>
 
                     <div class="bg-slate-50 rounded-3xl border border-slate-200 hover:border-blue-700 hover:shadow-2xl transition-all group overflow-hidden flex flex-col justify-between">
                         <div>
-                            <div class="relative h-48 w-full overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800" alt="Sofa, Rug & Carpet Cleaning" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="relative h-52 w-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" alt="Move-In Move-Out" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
                                 <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-blue-900/90 px-3 py-1 rounded-full border border-blue-500/30">
-                                    <i class="fa-solid fa-couch text-blue-300 mr-1"></i> Steam Extraction
+                                    <i class="fa-solid fa-truck-ramp-box text-amber-400 mr-1"></i> Turnkey Clean
                                 </span>
                             </div>
                             <div class="p-6">
-                                <h3 class="font-bold text-slate-900 text-lg mb-2">Sofa, Rug & Carpet Cleaning</h3>
-                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Heavy hot-water steam extraction for dirt removal on sofas, carpets, and luxury drapes.</p>
+                                <h3 class="font-bold text-slate-900 text-xl mb-2">Move-In / Move-Out Cleaning</h3>
+                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Comprehensive cleaning before moving into a new residence or handing over a vacated property to landlords or tenants.</p>
                             </div>
                         </div>
                         <div class="px-6 pb-6 pt-0">
-                            <button onclick="selectServiceAndScroll('Sofa, Rug & Carpet Cleaning')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
-                                Book Service <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            <button onclick="selectServiceAndScroll('Move-In / Move-Out Cleaning')" class="w-full bg-slate-900 text-white py-3.5 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
+                                Book Move Clean <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
                         </div>
                     </div>
 
                     <div class="bg-slate-50 rounded-3xl border border-slate-200 hover:border-blue-700 hover:shadow-2xl transition-all group overflow-hidden flex flex-col justify-between">
                         <div>
-                            <div class="relative h-48 w-full overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&q=80&w=800" alt="Pest Control & Fumigation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="relative h-52 w-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=800" alt="Housekeeping" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
                                 <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-blue-900/90 px-3 py-1 rounded-full border border-blue-500/30">
-                                    <i class="fa-solid fa-bug-slash text-blue-300 mr-1"></i> Certified Fumigation
+                                    <i class="fa-solid fa-broom text-amber-400 mr-1"></i> Routine Care
                                 </span>
                             </div>
                             <div class="p-6">
-                                <h3 class="font-bold text-slate-900 text-lg mb-2">Pest Control & Fumigation</h3>
-                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Certified safety chemical treatments against termites, rodents, and crawling pests.</p>
+                                <h3 class="font-bold text-slate-900 text-xl mb-2">Housekeeping & Maid Service</h3>
+                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Scheduled daily, weekly, or monthly trained housekeeper placements for high-standard residential and short-let apartment maintenance.</p>
                             </div>
                         </div>
                         <div class="px-6 pb-6 pt-0">
-                            <button onclick="selectServiceAndScroll('Pest Control & Fumigation')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
-                                Book Service <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            <button onclick="selectServiceAndScroll('Housekeeping & Maid Service')" class="w-full bg-slate-900 text-white py-3.5 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
+                                Request Housekeeper <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
                         </div>
                     </div>
 
                     <div class="bg-slate-50 rounded-3xl border border-slate-200 hover:border-blue-700 hover:shadow-2xl transition-all group overflow-hidden flex flex-col justify-between">
                         <div>
-                            <div class="relative h-48 w-full overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?auto=format&fit=crop&q=80&w=800" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1584813470613-5b1c1cad3d69?auto=format&fit=crop&q=80&w=800';" alt="Cleaning Product & Chemical Supply" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="relative h-52 w-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800" alt="General Contracts" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
                                 <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-blue-900/90 px-3 py-1 rounded-full border border-blue-500/30">
-                                    <i class="fa-solid fa-flask text-blue-300 mr-1"></i> Chemical Supply
+                                    <i class="fa-solid fa-briefcase text-amber-400 mr-1"></i> General Contracts
                                 </span>
                             </div>
                             <div class="p-6">
-                                <h3 class="font-bold text-slate-900 text-lg mb-2">Cleaning Product & Chemical Supply</h3>
-                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Wholesale and retail supply of top-grade cleaning detergents, disinfectants, solvents, and janitorial supplies.</p>
+                                <h3 class="font-bold text-slate-900 text-xl mb-2">General Contracts</h3>
+                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Renovations and interior decor.</p>
                             </div>
                         </div>
                         <div class="px-6 pb-6 pt-0">
-                            <button onclick="selectServiceAndScroll('Cleaning Product & Chemical Supply')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
-                                Book Service <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 rounded-3xl border border-slate-200 hover:border-blue-700 hover:shadow-2xl transition-all group overflow-hidden flex flex-col justify-between">
-                        <div>
-                            <div class="relative h-48 w-full overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=800';" alt="Building & Renovation Services" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
-                                <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-blue-900/90 px-3 py-1 rounded-full border border-blue-500/30">
-                                    <i class="fa-solid fa-truck-ramp-box text-blue-300 mr-1"></i> Relocation & Infrastructure
-                                </span>
-                            </div>
-                            <div class="p-6">
-                                <h3 class="font-bold text-slate-900 text-lg mb-2">Building & Renovation Services</h3>
-                                <p class="text-slate-600 text-xs leading-relaxed mb-4">Expert relocation, furniture moving, building renovation, and sustainable construction projects.</p>
-                            </div>
-                        </div>
-                        <div class="px-6 pb-6 pt-0">
-                            <button onclick="selectServiceAndScroll('Building & Renovation Services')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
-                                Book Service <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            <button onclick="selectServiceAndScroll('General Contracts & Building Execution')" class="w-full bg-slate-900 text-white py-3.5 rounded-xl font-black text-xs hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer shadow-md">
+                                Request Proposal <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
                         </div>
                     </div>
@@ -555,8 +488,8 @@
         <section id="gallery" class="py-24 bg-slate-50 border-t border-slate-200 text-slate-900">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-16">
-                    <span class="text-xs font-black text-blue-700 tracking-[0.2em] uppercase block mb-2">Visual Showcase</span>
-                    <h2 class="text-3xl sm:text-5xl font-black font-serif blue-gradient-text">Our Projects & Equipment</h2>
+                    <span class="text-xs font-black text-blue-700 tracking-[0.2em] uppercase block mb-2">Visual Proof Of Excellence</span>
+                    <h2 class="text-3xl sm:text-5xl font-black font-serif blue-gradient-text">Recent Project Sites</h2>
                     <div class="w-16 h-1 bg-gradient-to-r from-blue-700 to-slate-900 mx-auto mt-4 rounded-full"></div>
                 </div>
 
@@ -564,21 +497,21 @@
                     
                     <div class="glass-card rounded-3xl overflow-hidden border border-blue-900/20 shadow-2xl group p-3 bg-white">
                         <div class="relative overflow-hidden rounded-2xl bg-slate-100">
-                            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=1000" alt="Ohemaa Global Services Project 1" class="w-full h-80 sm:h-96 object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=1000" alt="Residential Deep Clean" class="w-full h-80 sm:h-96 object-cover transform group-hover:scale-105 transition-transform duration-700">
                         </div>
                         <div class="p-4 text-center">
-                            <h3 class="text-lg font-bold font-serif text-slate-900">Professional Field Operations</h3>
-                            <p class="text-xs text-slate-600 mt-1">Equipped with industry-leading tools and certified personnel for ultimate precision.</p>
+                            <h3 class="text-lg font-bold font-serif text-slate-900">Residential Deep Cleaning</h3>
+                            <p class="text-xs text-slate-600 mt-1">Full deep scrubbing and surface sanitation prior to luxury property occupancy.</p>
                         </div>
                     </div>
 
                     <div class="glass-card rounded-3xl overflow-hidden border border-blue-900/20 shadow-2xl group p-3 bg-white">
                         <div class="relative overflow-hidden rounded-2xl bg-slate-100">
-                            <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=1000" alt="Ohemaa Global Services Project 2" class="w-full h-80 sm:h-96 object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1000" alt="General Contracts Project" class="w-full h-80 sm:h-96 object-cover transform group-hover:scale-105 transition-transform duration-700">
                         </div>
                         <div class="p-4 text-center">
-                            <h3 class="text-lg font-bold font-serif text-slate-900">Commercial & Residential Excellence</h3>
-                            <p class="text-xs text-slate-600 mt-1">Delivering immaculate results across all cleaning and maintenance standards.</p>
+                            <h3 class="text-lg font-bold font-serif text-slate-900">General Contracts</h3>
+                            <p class="text-xs text-slate-600 mt-1">Renovations and interior decor.</p>
                         </div>
                     </div>
 
@@ -594,7 +527,7 @@
                     </div>
                     <span class="text-2xl font-black text-slate-900 font-serif tracking-widest">OHEMAA GLOBAL SERVICES</span>
                 </div>
-                <p class="text-xs text-slate-500 max-w-md mx-auto">Providing royal cleanliness, chemical supplies, and building standards across Lagos, Abuja, Port Harcourt, and clients worldwide.</p>
+                <p class="text-xs text-slate-500 max-w-md mx-auto">Leaders in Professional Cleaning, Fumigation, Housekeeping, Commercial Facility Sanitation, and General Contracts across Lagos, Abuja, Port Harcourt, and nationwide.</p>
                 <div class="pt-6 border-t border-slate-100 text-xs text-slate-400">
                     &copy; 2026 Ohemaa Global Services. Global Permanent Database Active.
                 </div>
@@ -824,7 +757,7 @@
             </div>
             <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 chat-scroll bg-slate-50 text-xs">
                 <div class="bg-white p-3 rounded-2xl border border-slate-200 text-slate-700 shadow-sm">
-                    Welcome to Ohemaa Global Services. How may we assist with your cleaning, chemical supplies, or building needs today?
+                    Welcome to Ohemaa Global Services. How may we assist with your cleaning, housekeeping, fumigation, or general contract requirements today?
                 </div>
             </div>
             <div class="p-3 bg-white border-t border-slate-200 flex gap-2">
@@ -918,7 +851,7 @@
                         name: item.name || 'Valued Client',
                         phone: item.phone || 'No Phone Provided',
                         email: item.email || 'N/A',
-                        service: item.service || 'General Cleaning Service',
+                        service: item.service || 'Residential Deep Cleaning',
                         message: item.message || 'No specific location/details entered.',
                         date: item.date || new Date().toLocaleDateString(),
                         time: item.time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -1020,7 +953,7 @@
             }
 
             if (!message || message.length < 3) {
-                showAlert('Please enter your address or city location.');
+                showAlert('Please enter your location or project details.');
                 return;
             }
 
@@ -1092,7 +1025,7 @@
 
         window.openWhatsAppConfirmation = function() {
             if (!latestBookingData) return;
-            const msg = `Hello Ohemaa Global Services!\n\nI want to book an appointment:\n- *Name:* ${latestBookingData.name}\n- *Phone:* ${latestBookingData.phone}\n- *Service:* ${latestBookingData.service}\n- *Date:* ${latestBookingData.date}\n- *Details:* ${latestBookingData.message}\n\nPlease confirm my request!`;
+            const msg = `Hello Ohemaa Global Services!\n\nI want to book a service:\n- *Name:* ${latestBookingData.name}\n- *Phone:* ${latestBookingData.phone}\n- *Service:* ${latestBookingData.service}\n- *Date:* ${latestBookingData.date}\n- *Details:* ${latestBookingData.message}\n\nPlease confirm my request!`;
             const url = `https://wa.me/2348065308556?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank');
         };
@@ -1129,7 +1062,7 @@
             if (totalEl) totalEl.innerText = appointmentOrders.length;
             if (pendingEl) pendingEl.innerText = appointmentOrders.filter(o => o.status === 'New Lead').length;
             if (completedEl) completedEl.innerText = appointmentOrders.filter(o => o.status === 'Completed').length;
-            if (estEl) estEl.innerText = '₦' + (appointmentOrders.length * 50000).toLocaleString();
+            if (estEl) estEl.innerText = '₦' + (appointmentOrders.length * 45000).toLocaleString();
 
             if (!grid) return;
 
@@ -1179,13 +1112,13 @@
                                     </button>
                                 </div>
 
-                                <p class="text-xs font-bold text-blue-900 mt-2"><i class="fa-solid fa-broom text-[10px] mr-1"></i>${order.service}</p>
+                                <p class="text-xs font-bold text-blue-900 mt-2"><i class="fa-solid fa-sparkles text-[10px] mr-1"></i>${order.service}</p>
                             </div>
 
                             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
                                 <p class="text-slate-700 font-medium"><i class="fa-solid fa-envelope mr-1.5 text-blue-700"></i> ${order.email || 'N/A'}</p>
                                 <div class="text-slate-700 text-[11px] leading-relaxed pt-2 border-t border-slate-200">
-                                    <span class="text-slate-400 block font-bold text-[9px] uppercase tracking-wider mb-0.5">Location & Details:</span>
+                                    <span class="text-slate-400 block font-bold text-[9px] uppercase tracking-wider mb-0.5">Location & Scope Details:</span>
                                     "${order.message}"
                                 </div>
                             </div>
